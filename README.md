@@ -1,5 +1,5 @@
-### Starter Project for the Material UI playlist
+# Welcome to Efective Notes
 
-Download the code & run **npm install** to install dependencies before starting the app.
+Effective Notes is a simple web project to manage note cards. It is my first project using JavaScript, ReactJs, Material UI, and JsonServer as mock Databases. 
 
-You'll also need to install Material UI as a dependency. To do this run **npm install @material-ui/core**
+
