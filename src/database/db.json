@@ -1,0 +1,32 @@
+{
+  "notes": [
+    {
+      "id": "b3e4691e-b2b2-48fa-b05a-de26d3c1f75a",
+      "title": "Create a note is ",
+      "date": "10th June 2021",
+      "details": "nice ",
+      "color": "#a2cf6e"
+    },
+    {
+      "title": "Create a note ",
+      "details": "is really nice ",
+      "date": "10th June 2021",
+      "color": "#fddf5d",
+      "id": "ccc6d17b-20aa-4867-abd0-eb7ee21c85d4"
+    },
+    {
+      "id": "7f60de90-6cf2-4a0a-a81a-2f0c7b54a174",
+      "title": "Create a note ",
+      "date": "10th June 2021",
+      "details": "is amazing ",
+      "color": "#af52bf"
+    },
+    {
+      "title": "Create a note ",
+      "details": "is effective ",
+      "date": "10th June 2021",
+      "color": "#35baf6",
+      "id": "101d6189-de3a-4de8-b181-e47f063e7433"
+    }
+  ]
+}
