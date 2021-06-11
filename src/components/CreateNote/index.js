@@ -41,62 +41,70 @@ export default function CreateNote({ notes, setNotes, palette }) {
     const [date, setDate] = useState(format( new Date(),  'do MMMM Y')); 
 
     const handleToSubmit = (e) => {
-        
+
         e.preventDefault(); 
         document.getElementById("create-note").reset(); 
         setColor( getRandonColor( palette, color ))
         setDate(format( new Date(),  'do MMMM Y'))
         const buildNote = { title, details, date, color,  id: uuidv4() }
         setNotes([...notes, buildNote]); 
-
+        
         if ( title && details ) {
           fetch('http://localhost:8000/notes', {
             method: 'POST', 
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(buildNote) 
           })
-        }   
+        }
+
+        setDetails(''); 
+        setTitle(''); 
     }
 
     const classes = useStyles();
 
     return (
 
-      <Card className={classes.root} elevation={0} > 
+      <Card className={classes.root} elevation={title? 3 : 0 } > 
         
-        <CardHeader
+        {/* <CardHeader
           subheader='Take a note'
-        />
+        /> */}
 
         <form noValidate autoComplete="off"  onSubmit={handleToSubmit} id="create-note" >
-        <CardContent>
-          <InputBase
-            className={classes.input}
-            placeholder="Title"
-            onChange={(e) => setTitle(e.target.value) }
-            inputProps={{ maxLength: 30 }}
-          />
-        </CardContent>
-
-        <CardContent>
-          <InputBase
-              onChange={(e) => setDetails(e.target.value) }
+        
+          <CardContent>
+            <InputBase
               className={classes.input}
-              placeholder="Details"
-              multiline
-              required
-              inputProps={{ maxLength: 120 }}
-          />  
+              placeholder="Hi!👋 Take a note here! 🖊"
+              onChange={(e) => setTitle(e.target.value) }
+              inputProps={{ maxLength: 30 }}
+            />
+          </CardContent>
 
-            <Button size="small" type='submit' >
-                create
-            </Button>
-        </CardContent>
+          {
+            title && 
+            <CardContent>
+              <InputBase
+                  onChange={(e) => {
+                    setDetails(e.target.value) 
+                  }}
+                  className={classes.input}
+                  placeholder="Note Details"
+                  multiline
+                  required
+                  inputProps={{ maxLength: 120 }}
+              />  
+            </CardContent>
+          }
 
-        <CardActions className='button' > 
-            
-        </CardActions>
-          
+          { title && 
+            <CardActions className='button' > 
+              <Button size="small" type='submit' >
+                  create
+              </Button>
+            </CardActions>
+          }
         </form>
       </Card>
     );
