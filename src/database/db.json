@@ -1,32 +1,112 @@
 {
   "notes": [
     {
-      "id": "b3e4691e-b2b2-48fa-b05a-de26d3c1f75a",
-      "title": "Create a note is ",
-      "date": "10th June 2021",
-      "details": "nice ",
-      "color": "#a2cf6e"
+      "title": "Create a Kambam board",
+      "details": "as a new rote ",
+      "date": "12th June 2021",
+      "color": {
+        "light": "#5CC1FF",
+        "dark": "#499ACC",
+        "color": "blue",
+        "id": 5
+      },
+      "id": "2c53b6df-b028-4b7c-b5ed-b06ee09a6f3a"
     },
     {
-      "title": "Create a note ",
-      "details": "is really nice ",
-      "date": "10th June 2021",
-      "color": "#fddf5d",
-      "id": "ccc6d17b-20aa-4867-abd0-eb7ee21c85d4"
+      "title": "Create a button ^",
+      "details": "To see new options in the application",
+      "date": "12th June 2021",
+      "color": {
+        "light": "#FFD32A",
+        "dark": "#CCAA21",
+        "color": "yellow",
+        "id": 1
+      },
+      "id": "b0707226-1c2c-4b5f-a46a-63021ef1a091"
     },
     {
-      "id": "7f60de90-6cf2-4a0a-a81a-2f0c7b54a174",
-      "title": "Create a note ",
-      "date": "10th June 2021",
-      "details": "is amazing ",
-      "color": "#af52bf"
+      "title": "Create a animation ",
+      "details": "for create new notes, like a transition",
+      "date": "12th June 2021",
+      "color": {
+        "light": "#ffa733",
+        "dark": "#CC8529",
+        "color": "Orange",
+        "id": 3
+      },
+      "id": "a47d4dcb-6ef9-471d-a539-0bbd5e2dbf3e"
     },
     {
-      "title": "Create a note ",
-      "details": "is effective ",
-      "date": "10th June 2021",
-      "color": "#35baf6",
-      "id": "101d6189-de3a-4de8-b181-e47f063e7433"
+      "id": "6b92a3f0-5f81-4f38-b0d4-368d988302b3",
+      "title": "Add categories or labels",
+      "date": "12th June 2021",
+      "details": "Add categories or labels for each note",
+      "color": {
+        "light": "#85DB6D",
+        "dark": "#65A653",
+        "color": "Green",
+        "id": 2
+      }
+    },
+    {
+      "title": "Search Feature",
+      "details": "Search for notes inside titles, details or category label..  ",
+      "date": "12th June 2021",
+      "color": {
+        "light": "#FF8063",
+        "dark": "#CC6650",
+        "color": "red",
+        "id": 0
+      },
+      "id": "284dd664-f24e-41de-9666-7dc20cc9f565"
+    },
+    {
+      "title": "Ajust the position notes ",
+      "details": "Use the vídeo tutorial material ui ninja to see create the feature",
+      "date": "12th June 2021",
+      "color": {
+        "light": "#ffa733",
+        "dark": "#CC8529",
+        "color": "Orange",
+        "id": 3
+      },
+      "id": "c5110021-d335-48cd-a0e7-8450860a5fc5"
+    },
+    {
+      "title": "Deploy the project ",
+      "details": "Using the netlify",
+      "date": "12th June 2021",
+      "color": {
+        "light": "#FF8063",
+        "dark": "#CC6650",
+        "color": "red",
+        "id": 0
+      },
+      "id": "742690ef-aa13-4fb3-9348-9f0dbdf1634c"
+    },
+    {
+      "title": "Test the project ",
+      "details": "Study about this",
+      "date": "12th June 2021",
+      "color": {
+        "light": "#ffa733",
+        "dark": "#CC8529",
+        "color": "Orange",
+        "id": 3
+      },
+      "id": "72e459a2-24c4-4b6c-b1a7-01ddab8ed42c"
+    },
+    {
+      "title": "Create a new icon mark as done",
+      "details": "and mark as note done. ",
+      "date": "12th June 2021",
+      "color": {
+        "light": "#5CC1FF",
+        "dark": "#499ACC",
+        "color": "blue",
+        "id": 5
+      },
+      "id": "3a4b4636-aff3-48bd-a097-efe3a842bc77"
     }
   ]
 }

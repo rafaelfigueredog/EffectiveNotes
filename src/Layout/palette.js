@@ -1,31 +1,37 @@
 const palette = [
     {
-        value: "#f9f9f9",
-        color: "white",
+        light: "#FF8063",
+        dark: "#CC6650", 
+        color: "red",
         id: 0
     },
     {
-        value: "#fddf5d",
+        light: "#FFD32A",
+        dark: "#CCAA21",
         color: "yellow",
         id: 1
     },
     {
-        value: "#a2cf6e",
+        light: "#85DB6D",
+        dark: "#65A653", 
         color: "Green",
         id: 2
     },
     {
-        value: "#ffa733",
+        light: "#ffa733",
+        dark: "#CC8529", 
         color: "Orange",
         id: 3
     },
     {
-        value: "#af52bf",
+        light: "#8997EB",
+        dark: "#6873B3", 
         color: "purple",
         id: 4
     },
     {
-        value: "#35baf6",
+        light: "#5CC1FF",
+        dark: "#499ACC", 
         color: "blue",
         id: 5
     }

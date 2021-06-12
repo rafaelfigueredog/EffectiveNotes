@@ -43,7 +43,7 @@ export default function Content( { notes, setNotes, palette } ) {
     const index = notes.findIndex(note => note.id === noteId); 
     const { id, title, date, details } = notes[index];  
     const colorObject = colors[indexColor]
-    const color = colorObject.value; 
+    const color = colorObject
     const updateNotes = [...notes] 
 
     const recolorNote = {

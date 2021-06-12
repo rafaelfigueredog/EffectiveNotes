@@ -2,12 +2,15 @@ import React from 'react'
 import gamer from '../../assets/img/gamer.png'
 import logoIcon from '../../assets/img/logo.png'
 import { format } from 'date-fns'
-import {Typography, makeStyles, AppBar, Toolbar, Avatar } from '@material-ui/core'
+import { Typography, makeStyles, AppBar, Toolbar, Avatar, IconButton } from '@material-ui/core'
+import Brightness7Icon from '@material-ui/icons/Brightness7'
+import Brightness4Icon from '@material-ui/icons/Brightness4'
 
 const useStyles = makeStyles((theme) => {
     return {
         AppBar: {
             display: 'flex',
+            backgroundColor: theme.palette.type === 'dark' ? '#424242' : '#fafafa' 
         },
         date: {
             flexGrow: 1, 
@@ -23,7 +26,7 @@ const useStyles = makeStyles((theme) => {
     }
 })
 
-export default function Header() {
+export default function Header( {paletteType, setPaletteType} ) {
     const classes = useStyles(); 
     return (
         <AppBar className={classes.AppBar}>
@@ -35,11 +38,21 @@ export default function Header() {
                         <Typography> Notes </Typography>
                     </span>
                 </Typography>
-                <Typography variant='body1' color='textPrimary'className={classes.date}>
+                <Typography variant='body1' color='textSecondary' className={classes.date}>
                     {format( new Date(),  'do MMMM Y')}
                 </Typography>
-                <Typography variant='body1' color='textPrimary' >
-                    User
+                    
+                <IconButton onClick={() => setPaletteType(!paletteType)}>
+                    { paletteType? <Brightness4Icon/> : <Brightness7Icon /> }
+                </IconButton>
+                
+                <Typography variant='body2' color='textSecondary'>
+                    Bem-vindo <br/> 
+                    <span>  
+                        <Typography variant='caption' aling='left' >
+                            user 
+                        </Typography>
+                    </span>
                 </Typography>
                 <Avatar src={gamer} alt="User"  className={classes.avatar}/>
             </Toolbar>

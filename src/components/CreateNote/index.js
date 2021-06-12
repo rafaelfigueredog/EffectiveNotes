@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader'
 import Button from '@material-ui/core/Button';
 import format from 'date-fns/format'
 import './styles.css'; 
@@ -19,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     marginButton: theme.spacing(5),
     marginLeft: 'auto', 
     marginRight: 'auto', 
+    backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' 
   }, 
   title: {
     fontSize: 14,
@@ -26,24 +26,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getRandonColor = (array, currentColor) => {
-  let newColor = array[[Math.floor(Math.random() * array.length)]].value; 
+  let newColor = array[Math.floor(Math.random() * array.length)]; 
   while ( currentColor === newColor) {
-    newColor = array[[Math.floor(Math.random() * array.length)]].value; 
+    newColor = array[Math.floor(Math.random() * array.length)]; 
   }  
   return newColor; 
 }
 
 export default function CreateNote({ notes, setNotes, palette }) {
 
-    const [color, setColor] = useState('')
+    const [color, setColor] = useState(getRandonColor(palette, ""))
     const [title, setTitle] = useState('');
     const [details, setDetails] = useState('');
     const [date, setDate] = useState(format( new Date(),  'do MMMM Y')); 
 
     const handleToSubmit = (e) => {
-
         e.preventDefault(); 
         document.getElementById("create-note").reset(); 
+
         setColor( getRandonColor( palette, color ))
         setDate(format( new Date(),  'do MMMM Y'))
         const buildNote = { title, details, date, color,  id: uuidv4() }
@@ -66,10 +66,6 @@ export default function CreateNote({ notes, setNotes, palette }) {
     return (
 
       <Card className={classes.root} elevation={title? 3 : 0 } > 
-        
-        {/* <CardHeader
-          subheader='Take a note'
-        /> */}
 
         <form noValidate autoComplete="off"  onSubmit={handleToSubmit} id="create-note" >
         

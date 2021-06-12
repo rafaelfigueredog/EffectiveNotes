@@ -8,7 +8,7 @@ import { FaCircle } from 'react-icons/fa'
 const useStyles = makeStyles(theme => {
   return {
     icon: {
-      width: theme.spacing(2)
+      width: theme.spacing(2), 
     }
   }
 })
@@ -21,7 +21,7 @@ export default function PopoverColors( {icon, palette, changeColor} ) {
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <div>
-          <IconButton variant="contained" color="inherit" {...bindTrigger(popupState)} >
+          <IconButton variant="contained" {...bindTrigger(popupState)} >
             {icon}
           </IconButton>
           <Popover
@@ -38,11 +38,10 @@ export default function PopoverColors( {icon, palette, changeColor} ) {
           
               
             {palette.map(color => (
-              <IconButton key={color.id} onClick={() => {changeColor(color.id)}} >
-                <FaCircle className={classes.icon} color={ color.value }> </FaCircle>
+              <IconButton key={color.id} onClick={() => {changeColor(color.id)}}  >
+                <FaCircle className={classes.icon} color={ color.light } />  
               </IconButton>
             ))} 
-
           </Popover>
         </div>
       )}
