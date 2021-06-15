@@ -7,7 +7,7 @@ Effective Notes is a simple web project to manage note cards. It is my first pro
 
 # Usage 
 
-[effectivenotes.app](effectivenotes.app) 
+[effectivenotes.app](https://effectivenotes.app) 
 
 # Usage on local server.
 
