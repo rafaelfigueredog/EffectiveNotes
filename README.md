@@ -31,14 +31,13 @@ $ json-server --watch src/database/db.json --port 8000
 - Create a Note
 - Delete Note
 - Update the color note
+- Dark Theme
+- Dynamic form for create notes 
 
 ## Future features
 
-- Dark Theme
 - Create category for notes. 
 - Edit an existent note
-- Dynamic form for create notes 
-
 
 ## Licence
 Effective note is [MIT licensed](https://github.com/rafaelfigueredog/effectiveNotes/blob/main/LICENSE).
