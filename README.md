@@ -4,7 +4,12 @@ Effective Notes is a simple web project to manage note cards. It is my first pro
 
 ![](https://github.com/rafaelfigueredog/effectiveNotes/blob/main/screenshot.png?raw=true)
 
-# Usage
+
+# Usage 
+
+effectivenotes.app
+
+# Usage on local server.
 
 **Front End**
 ```console
