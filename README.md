@@ -40,4 +40,4 @@ $ json-server --watch src/database/db.json --port 8000
 - Edit an existent note
 
 ## Licence
-Effective note is [MIT licensed](https://github.com/rafaelfigueredog/effectiveNotes/blob/main/LICENSE).
+Effective Notes is [MIT licensed](https://github.com/rafaelfigueredog/effectiveNotes/blob/main/LICENSE).
