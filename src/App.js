@@ -1,5 +1,5 @@
 import React, {useState } from 'react'
-import {Button, createMuiTheme, ThemeProvider} from '@material-ui/core'
+import {createMuiTheme, ThemeProvider} from '@material-ui/core'
 import Layout from './Layout';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -16,6 +16,7 @@ function App() {
       secondary: {
         main: '#ffc107',
       },
+      type: paletteType? 'light' : 'dark', 
     },
     typography: {
       fontFamily: 'Poppins', 
@@ -24,10 +25,6 @@ function App() {
       fontWeightMedium: 500, 
       fontWeightBold: 600
     }, 
-    palette: {
-      type: paletteType? 'light' : 'dark', 
-    }, 
-    
   });
 
   return (
