@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Grid, makeStyles } from '@material-ui/core';
-import NoteCard from '../components/NoteCard';
+import NoteCard from '../NoteCard';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -11,10 +11,10 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-export default function Content( { notes, setNotes, palette } ) {
+export default function BrainStormView( { notes, setNotes, palette } ) {
 
   const classes = useStyles()
-  const [colors, setColors] = useState(palette)
+  const colors = palette
 
   useEffect(() => {
     fetch('http://localhost:8000/notes')

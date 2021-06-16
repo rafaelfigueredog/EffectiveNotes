@@ -13,18 +13,6 @@
       "id": "2c53b6df-b028-4b7c-b5ed-b06ee09a6f3a"
     },
     {
-      "title": "Create a button ^",
-      "details": "To see new options in the application",
-      "date": "12th June 2021",
-      "color": {
-        "light": "#FFD32A",
-        "dark": "#CCAA21",
-        "color": "yellow",
-        "id": 1
-      },
-      "id": "b0707226-1c2c-4b5f-a46a-63021ef1a091"
-    },
-    {
       "title": "Create a animation ",
       "details": "for create new notes, like a transition",
       "date": "12th June 2021",
