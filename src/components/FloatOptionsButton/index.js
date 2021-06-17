@@ -1,68 +1,82 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
-import FileCopyIcon from '@material-ui/icons/FileCopyOutlined';
-import SaveIcon from '@material-ui/icons/Save';
-import PrintIcon from '@material-ui/icons/Print';
-import ShareIcon from '@material-ui/icons/Share';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import EditIcon from '@material-ui/icons/Edit';
+import {BsLightning} from 'react-icons/bs'; 
+import {BsFileCheck} from 'react-icons/bs'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    transform: 'translateZ(0px)',
-    flexGrow: 1,
-  },
-  speedDial: {
-    position: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
+    root: {
+        transform: 'translateZ(0px)',
+        flexGrow: 1,
+    },
+    speedDial: {
+        position: 'absolute',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
+    },
+    icons: {
+        fontSize: 20, 
+        color: theme.palette.type === 'dark'? 
+               theme.palette.primary.light : 
+               theme.palette.text.primary
+    }, 
 }));
 
-const actions = [
-  { icon: <FileCopyIcon />, name: 'Copy' },
-  { icon: <SaveIcon />, name: 'Save' },
-  { icon: <PrintIcon />, name: 'Print' },
-  { icon: <ShareIcon />, name: 'Share' },
-  { icon: <FavoriteIcon />, name: 'Like' },
-];
 
-export default function OpenIconSpeedDial() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+export default function OpenIconSpeedDial({mode, setMode}) {
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+   
+    const classes = useStyles();
+    const [open, setOpen] = useState(false);
+    
+    const actions = [
+        {id: 0, icon: <BsLightning className={classes.icons}/> , name: 'Brainstorming'}, 
+        {id: 1, icon: <BsFileCheck className={classes.icons}/> , name: 'Productive'}, 
+    ]; 
+    
+    
 
-  return (
-    <div className={classes.root}>
-      <SpeedDial 
-        ariaLabel="SpeedDial openIcon example"
-        className={classes.speedDial}
-        hidden={false}
-        icon={<SpeedDialIcon openIcon={<EditIcon />} />}
-        onClose={handleClose}
-        onOpen={handleOpen}
-        open={open}
-        color
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            onClick={handleClose}
-          />
-        ))}
-      </SpeedDial>
-    </div>
-  );
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleMode = (action) => {
+        console.log(action); 
+        setMode(action)
+    }
+    
+
+    return (
+        <div className={classes.root}>
+        <SpeedDial 
+            ariaLabel="Edition Mode"
+            className={classes.speedDial}
+            hidden={false}
+            icon={<SpeedDialIcon openIcon={<EditIcon />} icon={<MoreHorizIcon />} />}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            open={open}
+        >
+            {actions.map((action) => (
+            <SpeedDialAction
+                className={classes.speedDialAction}
+                key={action.name}
+                icon={action.icon}
+                tooltipTitle={action.name}
+                tooltipOpen
+                onClick={() =>  handleMode(action.id) }
+            />
+            ))}
+        </SpeedDial>
+        </div>
+    );
 }

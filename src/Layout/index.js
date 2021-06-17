@@ -5,6 +5,7 @@ import CreateNote from '../components/CreateNote'
 import React, {useState} from 'react'
 import palette from './palette'
 import FloatOptionsButton from '../components/FloatOptionsButton'
+import ProductiveView from '../components/ProductiveView'
 
 
 const useStyles = makeStyles({
@@ -15,17 +16,23 @@ const useStyles = makeStyles({
     }, 
 })
 
+
 export default function Layout( {paletteType, setPaletteType} ) {
 
     const classes = useStyles(); 
     const [notes, setNotes] = useState([])
+    const [mode, setMode] = useState(0)
 
     return (
         <div className={classes.root}>
             <Header paletteType={paletteType} setPaletteType={setPaletteType} /> 
             <CreateNote notes={notes} setNotes={setNotes} palette={palette} />
-            <BrainStormView notes={notes} setNotes={setNotes} palette={palette}/>
-            <FloatOptionsButton />
+            {
+                !mode? 
+                    <BrainStormView notes={notes} setNotes={setNotes} palette={palette}/> : 
+                    <ProductiveView />
+            }
+            <FloatOptionsButton mode={mode} setMode={setMode} />
         </div>
     )
 }
