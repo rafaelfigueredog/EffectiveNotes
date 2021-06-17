@@ -29,8 +29,8 @@ export default function Layout( {paletteType, setPaletteType} ) {
             <CreateNote notes={notes} setNotes={setNotes} palette={palette} />
             {
                 !mode? 
-                    <BrainStormView notes={notes} setNotes={setNotes} palette={palette}/> : 
-                    <ProductiveView />
+                    <BrainStormView notes={notes} setNotes={setNotes} palette={palette} /> : 
+                    <ProductiveView notes={notes} setNotes={setNotes} palette={palette} />
             }
             <FloatOptionsButton mode={mode} setMode={setMode} />
         </div>
