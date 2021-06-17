@@ -1,16 +1,16 @@
 {
   "notes": [
     {
+      "id": "2c53b6df-b028-4b7c-b5ed-b06ee09a6f3a",
       "title": "Create a Kambam board",
-      "details": "as a new rote ",
       "date": "12th June 2021",
+      "details": "as a new rote ",
       "color": {
-        "light": "#5CC1FF",
-        "dark": "#499ACC",
-        "color": "blue",
-        "id": 5
-      },
-      "id": "2c53b6df-b028-4b7c-b5ed-b06ee09a6f3a"
+        "light": "#FF8063",
+        "dark": "#CC6650",
+        "color": "red",
+        "id": 0
+      }
     },
     {
       "title": "Create a animation ",
@@ -61,18 +61,6 @@
       "id": "c5110021-d335-48cd-a0e7-8450860a5fc5"
     },
     {
-      "title": "Deploy the project ",
-      "details": "Using the netlify",
-      "date": "12th June 2021",
-      "color": {
-        "light": "#FF8063",
-        "dark": "#CC6650",
-        "color": "red",
-        "id": 0
-      },
-      "id": "742690ef-aa13-4fb3-9348-9f0dbdf1634c"
-    },
-    {
       "title": "Test the project ",
       "details": "Study about this",
       "date": "12th June 2021",
@@ -95,6 +83,18 @@
         "id": 5
       },
       "id": "3a4b4636-aff3-48bd-a097-efe3a842bc77"
+    },
+    {
+      "title": "Uncople the code ",
+      "details": "Urgent, we need to divide responsibilities",
+      "date": "17th June 2021",
+      "color": {
+        "light": "#FF8063",
+        "dark": "#CC6650",
+        "color": "red",
+        "id": 0
+      },
+      "id": "d037bd16-6d95-4759-acda-c26fbff7c477"
     }
   ]
 }
