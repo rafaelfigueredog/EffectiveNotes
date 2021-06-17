@@ -11,10 +11,12 @@ function App() {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#fafafa',
+        light: '#FFD32A', 
+        main: '#FDCA40',
+        dark: '#CCAA21'
       },
       secondary: {
-        main: '#ffc107',
+        main: '#3d5afe',
       },
       type: paletteType? 'light' : 'dark', 
     },
