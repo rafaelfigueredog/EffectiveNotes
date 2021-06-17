@@ -20,10 +20,19 @@ const useStyles = makeStyles((theme) => ({
     },
     icons: {
         fontSize: 20, 
-        color: theme.palette.type === 'dark'? 
-               theme.palette.primary.light : 
-               theme.palette.text.primary
+        color: theme.palette.type === 'light' ? 
+               theme.palette.text.primary : 
+               theme.palette.primary.main
+    },
+    activeIcon: {
+        fontSize: 20, 
+        color: theme.palette.type === 'light' ? 
+               theme.palette.text.primary : 
+               theme.palette.common.black
     }, 
+    speedDialAction: {
+        backgroundColor: theme.palette.primary.main
+    }
 }));
 
 
@@ -31,12 +40,20 @@ const useStyles = makeStyles((theme) => ({
 export default function OpenIconSpeedDial({mode, setMode}) {
 
    
-    const classes = useStyles();
+    const classes = useStyles(mode);
     const [open, setOpen] = useState(false);
     
     const actions = [
-        {id: 0, icon: <BsLightning className={classes.icons}/> , name: 'Brainstorming'}, 
-        {id: 1, icon: <BsFileCheck className={classes.icons}/> , name: 'Productive'}, 
+        {
+            id: 0, 
+            icon: <BsLightning className={ mode ? classes.icons : classes.activeIcon } />, 
+            name: 'Brainstorming'
+        }, 
+        {
+            id: 1, 
+            icon: <BsFileCheck className={mode ? classes.activeIcon : classes.icons } />, 
+            name: 'Productive'
+        }, 
     ]; 
     
     
@@ -50,8 +67,7 @@ export default function OpenIconSpeedDial({mode, setMode}) {
     };
 
     const handleMode = (action) => {
-        console.log(action); 
-        setMode(action)
+        setMode(action.id)
     }
     
 
@@ -67,16 +83,16 @@ export default function OpenIconSpeedDial({mode, setMode}) {
             open={open}
         >
             {actions.map((action) => (
-            <SpeedDialAction
-                className={classes.speedDialAction}
+            <SpeedDialAction 
+                className={mode === action.id? classes.speedDialAction : null }
                 key={action.name}
                 icon={action.icon}
                 tooltipTitle={action.name}
                 tooltipOpen
-                onClick={() =>  handleMode(action.id) }
+                onClick={() =>  handleMode(action) }
             />
             ))}
-        </SpeedDial>
+        </SpeedDial>    
         </div>
     );
 }
