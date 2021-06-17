@@ -72,7 +72,7 @@ export default function CreateNote({ notes, setNotes, palette }) {
           <CardContent>
             <InputBase
               className={classes.input}
-              placeholder="Hi!👋 Take a note here! 🖊"
+              placeholder="Hi everyone!👋 Take a note here! 🖊"
               onChange={(e) => setTitle(e.target.value) }
               inputProps={{ maxLength: 30 }}
             />
