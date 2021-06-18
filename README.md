@@ -23,6 +23,7 @@ $ yarn start
 
 Open a second instance of the terminal and go to the repository folder, run the following command: 
 ```console
+$ npm i json-server
 $ json-server --watch src/database/db.json --port 8000
 ```
 
