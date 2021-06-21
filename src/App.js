@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 function App() {
 
-  const [paletteType, setPaletteType] = useState(true)
+  const [paletteType, setPaletteType] = useState(false)
 
   const theme = createMuiTheme({
     palette: {
