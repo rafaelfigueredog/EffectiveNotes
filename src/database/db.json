@@ -1,46 +1,63 @@
 {
   "notes": [
     {
+      "id": "2c53b6df-b028-4b7c-b5ed-b06ee09a6f3a",
       "title": "Create a Kambam board",
+      "date": "12th June 2021",
+      "state": 0,
       "details": "as a new rote ",
-      "date": "12th June 2021",
       "color": {
-        "light": "#5CC1FF",
-        "dark": "#499ACC",
-        "color": "blue",
-        "id": 5
-      },
-      "id": "2c53b6df-b028-4b7c-b5ed-b06ee09a6f3a"
+        "light": "#ffa733",
+        "dark": "#CC8529",
+        "color": "Orange",
+        "id": 3
+      }
     },
     {
-      "title": "Create a button ^",
-      "details": "To see new options in the application",
+      "id": "6b92a3f0-5f81-4f38-b0d4-368d988302b3",
+      "title": "Add categories or labels",
       "date": "12th June 2021",
+      "state": 0,
+      "details": "Add categories or labels for each note",
       "color": {
-        "light": "#FFD32A",
-        "dark": "#CCAA21",
-        "color": "yellow",
-        "id": 1
-      },
-      "id": "b0707226-1c2c-4b5f-a46a-63021ef1a091"
+        "light": "#8997EB",
+        "dark": "#6873B3",
+        "color": "purple",
+        "id": 4
+      }
     },
     {
-      "title": "Create a animation ",
-      "details": "for create new notes, like a transition",
+      "id": "284dd664-f24e-41de-9666-7dc20cc9f565",
+      "title": "Search Feature",
       "date": "12th June 2021",
+      "details": "Search for notes inside titles, details or category label..  ",
       "color": {
         "light": "#ffa733",
         "dark": "#CC8529",
         "color": "Orange",
         "id": 3
       },
-      "id": "a47d4dcb-6ef9-471d-a539-0bbd5e2dbf3e"
+      "state": 1
     },
     {
-      "id": "6b92a3f0-5f81-4f38-b0d4-368d988302b3",
-      "title": "Add categories or labels",
+      "id": "c5110021-d335-48cd-a0e7-8450860a5fc5",
+      "title": "Ajust the position notes ",
       "date": "12th June 2021",
-      "details": "Add categories or labels for each note",
+      "details": "Use the vídeo tutorial material ui ninja to see create the feature",
+      "color": {
+        "light": "#5CC1FF",
+        "dark": "#499ACC",
+        "color": "blue",
+        "id": 5
+      },
+      "state": 0
+    },
+    {
+      "id": "72e459a2-24c4-4b6c-b1a7-01ddab8ed42c",
+      "title": "Test the project ",
+      "date": "12th June 2021",
+      "state": 0,
+      "details": "Study about this",
       "color": {
         "light": "#85DB6D",
         "dark": "#65A653",
@@ -49,64 +66,43 @@
       }
     },
     {
-      "title": "Search Feature",
-      "details": "Search for notes inside titles, details or category label..  ",
-      "date": "12th June 2021",
-      "color": {
-        "light": "#FF8063",
-        "dark": "#CC6650",
-        "color": "red",
-        "id": 0
-      },
-      "id": "284dd664-f24e-41de-9666-7dc20cc9f565"
-    },
-    {
-      "title": "Ajust the position notes ",
-      "details": "Use the vídeo tutorial material ui ninja to see create the feature",
-      "date": "12th June 2021",
-      "color": {
-        "light": "#ffa733",
-        "dark": "#CC8529",
-        "color": "Orange",
-        "id": 3
-      },
-      "id": "c5110021-d335-48cd-a0e7-8450860a5fc5"
-    },
-    {
-      "title": "Deploy the project ",
-      "details": "Using the netlify",
-      "date": "12th June 2021",
-      "color": {
-        "light": "#FF8063",
-        "dark": "#CC6650",
-        "color": "red",
-        "id": 0
-      },
-      "id": "742690ef-aa13-4fb3-9348-9f0dbdf1634c"
-    },
-    {
-      "title": "Test the project ",
-      "details": "Study about this",
-      "date": "12th June 2021",
-      "color": {
-        "light": "#ffa733",
-        "dark": "#CC8529",
-        "color": "Orange",
-        "id": 3
-      },
-      "id": "72e459a2-24c4-4b6c-b1a7-01ddab8ed42c"
-    },
-    {
+      "id": "3a4b4636-aff3-48bd-a097-efe3a842bc77",
       "title": "Create a new icon mark as done",
-      "details": "and mark as note done. ",
       "date": "12th June 2021",
+      "state": 0,
+      "details": "and mark as note done. ",
       "color": {
-        "light": "#5CC1FF",
-        "dark": "#499ACC",
-        "color": "blue",
-        "id": 5
-      },
-      "id": "3a4b4636-aff3-48bd-a097-efe3a842bc77"
+        "light": "#ffa733",
+        "dark": "#CC8529",
+        "color": "Orange",
+        "id": 3
+      }
+    },
+    {
+      "id": "d037bd16-6d95-4759-acda-c26fbff7c477",
+      "title": "Uncople the code ",
+      "date": "17th June 2021",
+      "state": 0,
+      "details": "Urgent, we need to divide responsibilities",
+      "color": {
+        "light": "#ffa733",
+        "dark": "#CC8529",
+        "color": "Orange",
+        "id": 3
+      }
+    },
+    {
+      "id": "2ee9a70f-d04a-49d3-b6f7-6a2e07de2422",
+      "title": "Create a new note to test ",
+      "date": "21st June 2021",
+      "state": 0,
+      "details": "if the new note has zero state ",
+      "color": {
+        "light": "#8997EB",
+        "dark": "#6873B3",
+        "color": "purple",
+        "id": 4
+      }
     }
   ]
 }

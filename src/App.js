@@ -1,21 +1,24 @@
 import React, {useState } from 'react'
-import {Button, createMuiTheme, ThemeProvider} from '@material-ui/core'
+import {createMuiTheme, ThemeProvider} from '@material-ui/core'
 import Layout from './Layout';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 function App() {
 
-  const [paletteType, setPaletteType] = useState(true)
+  const [paletteType, setPaletteType] = useState(false)
 
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#fafafa',
+        light: '#FFD32A', 
+        main: '#FDCA40',
+        dark: '#CCAA21'
       },
       secondary: {
-        main: '#ffc107',
+        main: '#3d5afe',
       },
+      type: paletteType? 'light' : 'dark', 
     },
     typography: {
       fontFamily: 'Poppins', 
@@ -24,10 +27,6 @@ function App() {
       fontWeightMedium: 500, 
       fontWeightBold: 600
     }, 
-    palette: {
-      type: paletteType? 'light' : 'dark', 
-    }, 
-    
   });
 
   return (

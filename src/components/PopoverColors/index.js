@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => {
   }
 })
 
-export default function PopoverColors( {icon, palette, changeColor} ) {
+export default function PopoverColors( {icon, palette, selectColor} ) {
 
   const classes = useStyles(); 
 
@@ -38,7 +38,7 @@ export default function PopoverColors( {icon, palette, changeColor} ) {
           
               
             {palette.map(color => (
-              <IconButton key={color.id} onClick={() => {changeColor(color.id)}}  >
+              <IconButton key={color.id} onClick={() => {selectColor(color.id)}}  >
                 <FaCircle className={classes.icon} color={ color.light } />  
               </IconButton>
             ))} 

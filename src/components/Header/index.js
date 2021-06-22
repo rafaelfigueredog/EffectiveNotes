@@ -1,16 +1,16 @@
 import React from 'react'
-import gamer from '../../assets/img/gamer.png'
 import logoIcon from '../../assets/img/logo.png'
-import { format } from 'date-fns'
-import { Typography, makeStyles, AppBar, Toolbar, Avatar, IconButton } from '@material-ui/core'
+import { Typography, makeStyles, AppBar, Toolbar, IconButton, Button } from '@material-ui/core'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
+import {BsLightning} from 'react-icons/bs'; 
+import {BsFileCheck} from 'react-icons/bs'
 
 const useStyles = makeStyles((theme) => {
     return {
         AppBar: {
             display: 'flex',
-            backgroundColor: theme.palette.type === 'dark' ? '#424242' : '#fafafa' 
+            backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' 
         },
         date: {
             flexGrow: 1, 
@@ -22,14 +22,26 @@ const useStyles = makeStyles((theme) => {
         img: {
             width: theme.spacing(5)
         }, 
-        toolbar: theme.mixins.toolbar
+        toolbar: theme.mixins.toolbar, 
+        
+        activeIcon: {
+            color: theme.palette.type === 'dark' ?
+                   theme.palette.primary.main :
+                   theme.palette.secondary.main 
+        }, 
+        mode: {
+            marginLeft: theme.spacing(2), 
+            color: theme.palette.type === 'dark' ?
+                   theme.palette.primary.main :
+                   theme.palette.secondary.main 
+        }
     }
 })
 
-export default function Header( {paletteType, setPaletteType} ) {
+export default function Header( {paletteType, setPaletteType, mode, setMode} ) {
     const classes = useStyles(); 
     return (
-        <AppBar className={classes.AppBar}>
+        <AppBar className={classes.AppBar} elevation={0} >
             <Toolbar>
                 <img src={logoIcon} className={classes.img} alt='logo'/>
                 <Typography variant='h6' color='textSecondary'className={classes.date}>
@@ -38,23 +50,24 @@ export default function Header( {paletteType, setPaletteType} ) {
                         <Typography> Notes </Typography>
                     </span>
                 </Typography>
-                <Typography variant='body1' color='textSecondary' className={classes.date}>
-                    {format( new Date(),  'do MMMM Y')}
-                </Typography>
-                    
-                <IconButton onClick={() => setPaletteType(!paletteType)}>
-                    { paletteType? <Brightness4Icon/> : <Brightness7Icon /> }
-                </IconButton>
                 
-                <Typography variant='body2' color='textSecondary'>
-                    Bem-vindo <br/> 
-                    <span>  
-                        <Typography variant='caption' aling='left' >
-                            user 
-                        </Typography>
-                    </span>
+           
+                <IconButton onClick={() => setPaletteType(!paletteType)} title='theme' >
+                    { paletteType? <Brightness4Icon /> : <Brightness7Icon /> }
+                </IconButton>
+
+                <IconButton onClick={() => setMode(1)} title='Productive' >
+                    <BsFileCheck className={ mode? classes.activeIcon : null }/>
+                </IconButton> 
+
+                 <IconButton onClick={() => setMode(0)}  title='Brainstorming' >
+                    <BsLightning className={ !mode? classes.activeIcon : null }/>
+                </IconButton>                    
+
+                <Typography className={classes.mode} >
+                   { mode? 'Productive' : 'Brainstorming' }
                 </Typography>
-                <Avatar src={gamer} alt="User"  className={classes.avatar}/>
+                
             </Toolbar>
         </AppBar>
     )
