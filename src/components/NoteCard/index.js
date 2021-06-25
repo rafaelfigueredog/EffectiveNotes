@@ -115,12 +115,14 @@ export default function NoteCard( {note, notes, setNotes} ) {
                 </Typography>
             }
             />
-            <CardContent  >
-                <Typography variant='body2'   >
-                    {note.details}
-                </Typography>
-            </CardContent>
-
+            {
+                note.details && 
+                <CardContent  >
+                    <Typography variant='body2'>
+                        {note.details}
+                    </Typography>
+                </CardContent>
+            }
             <CardContent className={classes.containerIcons} >
                 <PopoverColors  icon={<RiPaletteLine title='Select color'/>} palette={palette} selectColor={selectColor}  />
                 <IconButton  onClick={() => handleToDelete(note.id)} >
