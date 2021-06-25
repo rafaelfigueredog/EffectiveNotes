@@ -41,16 +41,17 @@ export default function CreateNote({ notes, setNotes, mode }) {
     const [date, setDate] = useState(format( new Date(),  'do MMMM Y')); 
     const state = !mode? 0 : 1; 
 
+
     const handleToSubmit = (e) => {
         e.preventDefault(); 
         document.getElementById("create-note").reset(); 
 
-        setColor( getRandonColor( palette, color ))
-        setDate(format( new Date(),  'do MMMM Y'))
-        const buildNote = { title, details, date, color,  id: uuidv4(), state }
-        setNotes([...notes, buildNote]); 
-        
-        if ( title && details ) {
+        if (title) {
+          setColor( getRandonColor( palette, color ))
+          setDate(format( new Date(),  'do MMMM Y'))
+          const buildNote = { title, details, date, color,  id: uuidv4(), state }
+          setNotes([...notes, buildNote]); 
+
           fetch('http://localhost:8000/notes', {
             method: 'POST', 
             headers: {"Content-type": "application/json"},
@@ -70,12 +71,13 @@ export default function CreateNote({ notes, setNotes, mode }) {
 
         <form noValidate autoComplete="off"  onSubmit={handleToSubmit} id="create-note" >
         
-          <CardContent >
+          <CardContent>
             <InputBase
               className={classes.input}
               placeholder='Take a note here! 🖊'
               onChange={(e) => setTitle(e.target.value) }
               inputProps={{ maxLength: 30 }}
+              required
             />
           </CardContent>
 
@@ -88,8 +90,6 @@ export default function CreateNote({ notes, setNotes, mode }) {
                   }}
                   className={classes.input}
                   placeholder="Note Details"
-                  multiline
-                  required
                   inputProps={{ maxLength: 130 }}
               />  
             </CardContent>
@@ -98,7 +98,7 @@ export default function CreateNote({ notes, setNotes, mode }) {
           { title && 
             <CardActions className='button' > 
               <Button size="small" type='submit' >
-                  create
+                  create  
               </Button>
             </CardActions>
           }

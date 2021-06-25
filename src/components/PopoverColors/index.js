@@ -1,9 +1,8 @@
 import React from 'react';
 import Popover from '@material-ui/core/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-import { IconButton, Grid, makeStyles } from '@material-ui/core';
+import { IconButton, makeStyles } from '@material-ui/core';
 import { FaCircle } from 'react-icons/fa'
-
 
 const useStyles = makeStyles(theme => {
   return {
@@ -14,9 +13,7 @@ const useStyles = makeStyles(theme => {
 })
 
 export default function PopoverColors( {icon, palette, selectColor} ) {
-
   const classes = useStyles(); 
-
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
@@ -35,8 +32,6 @@ export default function PopoverColors( {icon, palette, selectColor} ) {
               horizontal: 'center',
             }}
           >
-          
-              
             {palette.map(color => (
               <IconButton key={color.id} onClick={() => {selectColor(color.id)}}  >
                 <FaCircle className={classes.icon} color={ color.light } />  
