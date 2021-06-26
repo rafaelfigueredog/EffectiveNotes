@@ -9,8 +9,7 @@ import { makeStyles } from '@material-ui/core';
 import { RiPaletteLine } from 'react-icons/ri'
 import {RiDeleteBin2Line} from 'react-icons/ri'
 import {BsKanban} from 'react-icons/bs'
-import {FiPlay} from 'react-icons/fi'
-import {MdDone} from 'react-icons/md'
+import {BsCheckCircle} from 'react-icons/bs'
 import {RiArrowGoBackFill} from 'react-icons/ri'
 import palette from './palette'
 import { set } from 'date-fns';
@@ -21,19 +20,21 @@ const useStyles = makeStyles((theme) => {
             backgroundColor: (note) => theme.palette.type === 'light'? 
                                         note.color.light : 
                                         note.color.dark, 
-
-            textDecoration: (note) => note.state === 3 ? 
-                            'line-through' : null, 
             width: 300, 
         },  
         containerIcons: {
             display: 'flex',  
         },
+        iconDone: {
+            color: theme.palette.type === 'light'? 
+                   theme.palette.text.secondary : 
+                   theme.palette.text.primary 
+        }
     }
 }); 
 
 
-export default function NoteCard( {note, notes, setNotes, onKanban, setOnKanban} ) {
+export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban}) {
 
     const classes = useStyles(note)
 
@@ -53,13 +54,12 @@ export default function NoteCard( {note, notes, setNotes, onKanban, setOnKanban}
         const updateNotes = [...notes] 
         updateNotes[index] = noteToUpdate; 
         setNotes(updateNotes)
-        console.log("Before set...", onKanban); 
         setOnKanban((onKanban + 1)); 
-        console.log("after set...", onKanban); 
     }
     
     const handleUpdateNotesColor = async (noteId, indexColor) => {
-    
+        
+        console.log(noteId, indexColor); 
 
         const index = notes.findIndex(note => note.id === noteId); 
         const { id, title, date, details, state } = notes[index];  
@@ -103,7 +103,7 @@ export default function NoteCard( {note, notes, setNotes, onKanban, setOnKanban}
        <Card elevation={3} className={classes.card} >
            <CardHeader className={classes.content} 
             title={ 
-                <Typography variant='h6' noWrap={false} >
+                <Typography variant='h6' noWrap={false}>
                     {note.title}
                 </Typography>
             }
@@ -111,6 +111,11 @@ export default function NoteCard( {note, notes, setNotes, onKanban, setOnKanban}
                 <Typography variant="caption" >
                     {note.date}
                 </Typography>
+            }
+            action={note.state === 3 && 
+                <IconButton disabled >
+                    <BsCheckCircle className={classes.iconDone} />
+                </IconButton>
             }
             />
             {

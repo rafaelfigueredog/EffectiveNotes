@@ -26,16 +26,14 @@ const useStyles = makeStyles((theme) => {
     },
     containerNotes: {
       display: 'flex', 
+      flexGrow: 1, 
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start', 
       margin: theme.spacing(1), 
-      minHeight: '400px', 
+      minHeight: '100vh', 
       borderRadius: 5,    
     },
-   /*  colorDrag: () => {
-      return theme.palette.type === 'ligth'? '#f5f5f5' : '#424242',   
-    } */
   };
 });
 
@@ -43,19 +41,22 @@ const TODO = uuidv4();
 const INPROGRESS = uuidv4(); 
 const DONE = uuidv4(); 
 
-const columnsFromBackEnd = (notes) => {
+const columnsFromBackEnd = (todo, inProgress, done) => {
   return {
     [TODO]: {
       name: "To-do",
-      items: notes
+      items: todo,
+      state: 1
     }, 
     [INPROGRESS]: {
       name: "In Progress",
-      items: []
+      items: inProgress,
+      state: 2
     },
     [DONE]: {
       name: "Done",
-      items: []
+      items: done, 
+      state: 3, 
     }
   };
 }
@@ -103,8 +104,10 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
   const classes = useStyles();
 
   useEffect(() => {
-    const todoList = notes.filter(note => note.state === 1);  
-    setColumns(columnsFromBackEnd(todoList)); 
+    const todo = notes.filter(note => note.state === 1);
+    const inProgress = notes.filter(note => note.state === 2); 
+    const done = notes.filter(note => note.state === 3);   
+    setColumns(columnsFromBackEnd(todo, inProgress, done)); 
   }, [notes])
 
   if ( onKanban ) {
@@ -113,17 +116,13 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
   
   return (
     <Container className={classes.page} >
-      <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
+      <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns, notes, setNotes)}>
         {Object.entries(columns).map(([columnId, column], index) => {
             return (
               <div
                 class='column'
                 key={columnId}
               >
-                <div>
-                  <h3 className={classes.subtitle}> {column.name} </h3>
-                </div>
-                
                 <Droppable droppableId={columnId} key={columnId}>
                   { (provided, snapshot) => {
                     return (
@@ -135,8 +134,15 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
                           background: snapshot.isDraggingOver
                             ? paletteType? '#f5f5f5' : '#424242'
                             : null,
+                          flexGrow: 1,
+                          alignSelf: 'stretch' 
                         }} 
+                        
                       >
+                        <div>
+                          <h3 className={classes.subtitle}> {column.name} </h3>
+                        </div>
+
                         {
                           column.items.map((note, index) => {
                             return (
@@ -157,7 +163,13 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
                                           {...provided.draggableProps.style}
                                         }
                                       > 
-                                        <NoteCard note={note} />
+                                        <NoteCard 
+                                          note={note} 
+                                          notes={notes}
+                                          setNotes={setNotes}
+                                          onKanban={onKanban}
+                                          setOnKanban={setOnKanban}
+                                        />
                                       </div>
                                     );
                                   }

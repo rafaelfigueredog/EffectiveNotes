@@ -10,8 +10,9 @@
 .column {
     float: left;
     width: 33.33%;
+    height: max-content;
     align-items: stretch;
-    justify-content: center;
+    justify-content: stretch;
 }
 
 

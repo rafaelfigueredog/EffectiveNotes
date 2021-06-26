@@ -82,7 +82,7 @@
       "id": "d037bd16-6d95-4759-acda-c26fbff7c477",
       "title": "Uncople the code ",
       "date": "17th June 2021",
-      "state": 0,
+      "state": 3,
       "details": "Urgent, we need to divide responsibilities",
       "color": {
         "light": "#ffa733",
@@ -92,29 +92,42 @@
       }
     },
     {
-      "id": "2ee9a70f-d04a-49d3-b6f7-6a2e07de2422",
-      "title": "Create a new note to test ",
-      "date": "21st June 2021",
-      "state": 0,
-      "details": "if the new note has zero state ",
+      "id": "3b6cc535-d8ed-4ac6-95a0-24fd69d1985d",
+      "title": "This is a new note ",
+      "date": "25th June 2021",
+      "details": "This note was made to test if create is ok on kanban",
       "color": {
         "light": "#8997EB",
         "dark": "#6873B3",
         "color": "purple",
         "id": 4
-      }
+      },
+      "state": 1
     },
     {
-      "title": "This is a new note ",
-      "details": "This note was made to test if create is ok on kanban",
-      "date": "25th June 2021",
+      "title": "Create a new Note ",
+      "details": "dskadskad",
+      "date": "26th June 2021",
       "color": {
         "light": "#85DB6D",
         "dark": "#65A653",
         "color": "Green",
         "id": 2
       },
-      "id": "3b6cc535-d8ed-4ac6-95a0-24fd69d1985d",
+      "id": "4c8f907c-bc93-4234-b42f-d57981634469",
+      "state": 0
+    },
+    {
+      "title": "Fix change color ",
+      "details": "Fix change color on productive view ",
+      "date": "26th June 2021",
+      "color": {
+        "light": "#FFD32A",
+        "dark": "#CCAA21",
+        "color": "yellow",
+        "id": 1
+      },
+      "id": "52e09afc-409e-40c1-9ba4-4cfefebf438f",
       "state": 1
     }
   ]
