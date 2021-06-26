@@ -5,7 +5,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core';
+import { CircularProgress, makeStyles } from '@material-ui/core';
 import { RiPaletteLine } from 'react-icons/ri'
 import {RiDeleteBin2Line} from 'react-icons/ri'
 import {BsKanban} from 'react-icons/bs'
@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => {
             color: theme.palette.type === 'light'? 
                    theme.palette.text.secondary : 
                    theme.palette.text.primary 
+            
         }
     }
 }); 
@@ -112,7 +113,8 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
                     {note.date}
                 </Typography>
             }
-            action={note.state === 3 && 
+            action={
+                (note.state === 3) && 
                 <IconButton disabled >
                     <BsCheckCircle className={classes.iconDone} />
                 </IconButton>

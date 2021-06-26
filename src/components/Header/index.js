@@ -50,8 +50,7 @@ export default function Header( {paletteType, setPaletteType, mode, setMode, onK
                     <span> 
                         <Typography> Notes </Typography>
                     </span>
-                </Typography>
-                
+                </Typography>  
            
                 <IconButton onClick={() => setPaletteType(!paletteType)} title='theme' >
                     { paletteType?  <Brightness4Icon /> : <Brightness7Icon /> }
@@ -62,15 +61,9 @@ export default function Header( {paletteType, setPaletteType, mode, setMode, onK
                         <BsKanban className={ mode? classes.activeIcon : null }/>
                     </Badge>
                 </IconButton> 
-
-                 <IconButton onClick={() => setMode(0)}  title='Brainstorming' >
+                <IconButton onClick={() => setMode(0)}  title='Brainstorming' >
                     <BsLightning className={ !mode? classes.activeIcon : null }/>
                 </IconButton>                    
-
-                <Typography className={classes.mode} >
-                   { mode? 'Productive' : 'Brainstorming' }
-                </Typography>
-                
             </Toolbar>
         </AppBar>
     )

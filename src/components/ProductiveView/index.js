@@ -61,7 +61,7 @@ const columnsFromBackEnd = (todo, inProgress, done) => {
   };
 }
 
-const onDragEnd = (result, columns, setColumns) => {
+const onDragEnd = (result, columns, setColumns, notes, setNotes, setChangeOnDrag) => {
   if (!result.destination) return;
   const { source, destination } = result;
 
@@ -71,6 +71,16 @@ const onDragEnd = (result, columns, setColumns) => {
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
+
+    // update notes
+    const index = notes.findIndex(note => note.id === removed.id); 
+    const noteToUpdate = notes[index]; 
+    noteToUpdate.state = destColumn.state;  
+    const updateNotes = [...notes] 
+    updateNotes[index] = noteToUpdate; 
+    setChangeOnDrag(true); 
+    setNotes(updateNotes)
+
     destItems.splice(destination.index, 0, removed);
     setColumns({
       ...columns,
@@ -98,16 +108,21 @@ const onDragEnd = (result, columns, setColumns) => {
   }
 };
 
-export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, paletteType}) {
+export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, paletteType, mode}) {
   
   const [columns, setColumns] = useState({});
+  const [changeOnDrag, setChangeOnDrag] = useState(false); 
   const classes = useStyles();
 
   useEffect(() => {
+    if (changeOnDrag) {
+      setChangeOnDrag(false); 
+      return;
+    }
     const todo = notes.filter(note => note.state === 1);
     const inProgress = notes.filter(note => note.state === 2); 
     const done = notes.filter(note => note.state === 3);   
-    setColumns(columnsFromBackEnd(todo, inProgress, done)); 
+    setColumns(columnsFromBackEnd(todo, inProgress, done));
   }, [notes])
 
   if ( onKanban ) {
@@ -116,7 +131,15 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
   
   return (
     <Container className={classes.page} >
-      <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns, notes, setNotes)}>
+      <DragDropContext 
+        onDragEnd={result => onDragEnd( 
+            result, 
+            columns, 
+            setColumns, 
+            notes, 
+            setNotes,
+            setChangeOnDrag, 
+        )}>
         {Object.entries(columns).map(([columnId, column], index) => {
             return (
               <div
@@ -168,7 +191,7 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
                                           notes={notes}
                                           setNotes={setNotes}
                                           onKanban={onKanban}
-                                          setOnKanban={setOnKanban}
+                                          setOnKanban={setOnKanban} 
                                         />
                                       </div>
                                     );
