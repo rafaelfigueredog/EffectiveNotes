@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Divider, makeStyles, Typography } from "@material-ui/core/";
-import Typograpy from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Container from '@material-ui/core/Container'
-import Grid from "@material-ui/core/Grid";
+import { v4 as uuidv4 } from 'uuid';
 import NoteCard from "../NoteCard";
 import '../../styles.css'
 
@@ -13,6 +13,10 @@ const useStyles = makeStyles((theme) => {
     },
     subtitle: {
       flexGrow: 1, 
+      textAlign: 'center', 
+      color: theme.palette.type === 'dark'?
+             theme.palette.grey[300] :
+             theme.palette.grey[500],   
       marginBottom: theme.spacing(3), 
       marginTop: theme.spacing(3)
     }, 
@@ -20,72 +24,156 @@ const useStyles = makeStyles((theme) => {
         marginBottom: theme.spacing(2),
         marginTop: theme.spacing(2), 
     },
+    containerNotes: {
+      display: 'flex', 
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-start', 
+      margin: theme.spacing(1), 
+      minHeight: '400px', 
+      borderRadius: 5,    
+    },
+   /*  colorDrag: () => {
+      return theme.palette.type === 'ligth'? '#f5f5f5' : '#424242',   
+    } */
   };
 });
 
+const TODO = uuidv4(); 
+const INPROGRESS = uuidv4(); 
+const DONE = uuidv4(); 
 
+const columnsFromBackEnd = (notes) => {
+  return {
+    [TODO]: {
+      name: "To-do",
+      items: notes
+    }, 
+    [INPROGRESS]: {
+      name: "In Progress",
+      items: []
+    },
+    [DONE]: {
+      name: "Done",
+      items: []
+    }
+  };
+}
 
+const onDragEnd = (result, columns, setColumns) => {
+  if (!result.destination) return;
+  const { source, destination } = result;
 
-export default function ProductiveView({ notes, setNotes}) {
+  if (source.droppableId !== destination.droppableId) {
+    const sourceColumn = columns[source.droppableId];
+    const destColumn = columns[destination.droppableId];
+    const sourceItems = [...sourceColumn.items];
+    const destItems = [...destColumn.items];
+    const [removed] = sourceItems.splice(source.index, 1);
+    destItems.splice(destination.index, 0, removed);
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...sourceColumn,
+        items: sourceItems
+      },
+      [destination.droppableId]: {
+        ...destColumn,
+        items: destItems
+      }
+    });
+  } else {
+    const column = columns[source.droppableId];
+    const copiedItems = [...column.items];
+    const [removed] = copiedItems.splice(source.index, 1);
+    copiedItems.splice(destination.index, 0, removed);
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...column,
+        items: copiedItems
+      }
+    });
+  }
+};
 
-  const [todo, setTodo] = useState(notes.filter(note => note.state === 1));
-  const [inProgress, setInProgress] = useState(notes.filter(note => note.state === 2));
-  const [done, setDone] = useState(notes.filter(note => note.state === 3));
-
-  useEffect(() => {
-    setTodo(notes.filter(note => note.state === 1)); 
-    setInProgress(notes.filter(note => note.state === 2)); 
-    setDone(notes.filter(note => note.state === 3));
-  }, [notes])
-
+export default function ProductiveView({notes, setNotes, onKanban, setOnKanban}) {
+  
+  const [columns, setColumns] = useState({});
   const classes = useStyles();
 
+  useEffect(() => {
+    const todoList = notes.filter(note => note.state === 1);  
+    setColumns(columnsFromBackEnd(todoList)); 
+  }, [notes])
+
+  if ( onKanban ) {
+    setOnKanban(0); 
+  }
+  
   return (
     <Container className={classes.page} >
-      <div className="column"> 
-        <Typograpy className={classes.subtitle} align='center'variant='body1' color='textSecondary' > To-do </Typograpy>
-        <Grid container spacing={2} direction="row" justify="center" alignItems="flex-start"  >
-          {todo.map(note => (
-            <Grid item key={note.id} xs={12} sm={4} md={3} lg={9} > 
-                <NoteCard 
-                  note={note} 
-                  notes={notes}
-                  setNotes={setNotes}
-                />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-      <Divider orientation='vertical' flexItem />
-      <div class="column"> 
-        <Typograpy className={classes.subtitle} align='center'variant='body1' color='textSecondary'  > Doing </Typograpy>
-        <Grid container spacing={2} direction="row" justify="center" alignItems="flex-start"  >
-          {inProgress.map(note => (
-            <Grid item key={note.id} xs={12} sm={4} md={3} lg={9} > 
-                <NoteCard 
-                  note={note} 
-                  notes={notes}
-                  setNotes={setNotes}
-                />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-      <Divider orientation='vertical' flexItem />
-      <div class="column"> 
-        <Typograpy className={classes.subtitle} align='center' variant='body1' color='textSecondary' > Done </Typograpy>
-        <Grid container spacing={2} direction="row" justify="center" alignItems="flex-start"  >
-          {done.map(note => (
-            <Grid item key={note.id} xs={12} sm={4} md={3} lg={9} > 
-                <NoteCard 
-                  note={note} 
-                  notes={notes}
-                  setNotes={setNotes}
-                />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
+      <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
+        {Object.entries(columns).map(([columnId, column], index) => {
+            return (
+              <div
+                class='column'
+                key={columnId}
+              >
+                <div>
+                  <h3 className={classes.subtitle}> {column.name} </h3>
+                </div>
+                
+                <Droppable droppableId={columnId} key={columnId}>
+                  { (provided, snapshot) => {
+                    return (
+                      <div
+                        {... provided.droppableProps } 
+                        ref={provided.innerRef}
+                        className={classes.containerNotes}
+                        style={{
+                          background: snapshot.isDraggingOver
+                            ? '#f5f5f5'
+                            : null,
+                        }} 
+                      >
+                        {
+                          column.items.map((note, index) => {
+                            return (
+                              <Draggable
+                                key={note.id}
+                                draggableId={note.id}
+                                index={index}
+                              >
+                                {
+                                  (provided, snapshot) => {
+                                    return (
+                                      <div 
+                                        className={classes.notes}
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        style={
+                                          {...provided.draggableProps.style}
+                                        }
+                                      > 
+                                        <NoteCard note={note} />
+                                      </div>
+                                    );
+                                  }
+                                }
+                              </Draggable>
+                            )
+                          })}
+                        {provided.placeholder}
+                      </div>
+                    );
+                  }}
+                </Droppable>
+              </div>
+            );
+        })}
+      </DragDropContext>
     </Container>
   );
 }

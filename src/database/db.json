@@ -4,27 +4,27 @@
       "id": "2c53b6df-b028-4b7c-b5ed-b06ee09a6f3a",
       "title": "Create a Kambam board",
       "date": "12th June 2021",
-      "state": 0,
       "details": "as a new rote ",
       "color": {
-        "light": "#ffa733",
-        "dark": "#CC8529",
-        "color": "Orange",
-        "id": 3
-      }
+        "light": "#FFD32A",
+        "dark": "#CCAA21",
+        "color": "yellow",
+        "id": 1
+      },
+      "state": 0
     },
     {
       "id": "6b92a3f0-5f81-4f38-b0d4-368d988302b3",
       "title": "Add categories or labels",
       "date": "12th June 2021",
-      "state": 0,
       "details": "Add categories or labels for each note",
       "color": {
-        "light": "#8997EB",
-        "dark": "#6873B3",
-        "color": "purple",
-        "id": 4
-      }
+        "light": "#FF8063",
+        "dark": "#CC6650",
+        "color": "red",
+        "id": 0
+      },
+      "state": 0
     },
     {
       "id": "284dd664-f24e-41de-9666-7dc20cc9f565",
@@ -32,12 +32,12 @@
       "date": "12th June 2021",
       "details": "Search for notes inside titles, details or category label..  ",
       "color": {
-        "light": "#ffa733",
-        "dark": "#CC8529",
-        "color": "Orange",
-        "id": 3
+        "light": "#85DB6D",
+        "dark": "#65A653",
+        "color": "Green",
+        "id": 2
       },
-      "state": 1
+      "state": 0
     },
     {
       "id": "c5110021-d335-48cd-a0e7-8450860a5fc5",
@@ -69,14 +69,14 @@
       "id": "3a4b4636-aff3-48bd-a097-efe3a842bc77",
       "title": "Create a new icon mark as done",
       "date": "12th June 2021",
-      "state": 0,
       "details": "and mark as note done. ",
       "color": {
-        "light": "#ffa733",
-        "dark": "#CC8529",
-        "color": "Orange",
-        "id": 3
-      }
+        "light": "#5CC1FF",
+        "dark": "#499ACC",
+        "color": "blue",
+        "id": 5
+      },
+      "state": 0
     },
     {
       "id": "d037bd16-6d95-4759-acda-c26fbff7c477",
@@ -103,6 +103,19 @@
         "color": "purple",
         "id": 4
       }
+    },
+    {
+      "title": "This is a new note ",
+      "details": "This note was made to test if create is ok on kanban",
+      "date": "25th June 2021",
+      "color": {
+        "light": "#85DB6D",
+        "dark": "#65A653",
+        "color": "Green",
+        "id": 2
+      },
+      "id": "3b6cc535-d8ed-4ac6-95a0-24fd69d1985d",
+      "state": 1
     }
   ]
 }

@@ -13,6 +13,7 @@ import {FiPlay} from 'react-icons/fi'
 import {MdDone} from 'react-icons/md'
 import {RiArrowGoBackFill} from 'react-icons/ri'
 import palette from './palette'
+import { set } from 'date-fns';
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => {
 
             textDecoration: (note) => note.state === 3 ? 
                             'line-through' : null, 
+            width: 300, 
         },  
         containerIcons: {
             display: 'flex',  
@@ -31,7 +33,7 @@ const useStyles = makeStyles((theme) => {
 }); 
 
 
-export default function NoteCard( {note, notes, setNotes} ) {
+export default function NoteCard( {note, notes, setNotes, onKanban, setOnKanban} ) {
 
     const classes = useStyles(note)
 
@@ -51,16 +53,15 @@ export default function NoteCard( {note, notes, setNotes} ) {
         const updateNotes = [...notes] 
         updateNotes[index] = noteToUpdate; 
         setNotes(updateNotes)
+        console.log("Before set...", onKanban); 
+        setOnKanban((onKanban + 1)); 
+        console.log("after set...", onKanban); 
     }
     
     const handleUpdateNotesColor = async (noteId, indexColor) => {
-        
-        console.log(note)
-        console.log(indexColor)
-        console.log(palette)
+    
 
         const index = notes.findIndex(note => note.id === noteId); 
-        
         const { id, title, date, details, state } = notes[index];  
         const colorObject = palette[indexColor]
         const color = colorObject
@@ -74,9 +75,6 @@ export default function NoteCard( {note, notes, setNotes} ) {
           color, 
           state, 
         }
-
-        console.log(recolorNote)
-        console.log(notes)
     
         updateNotes[index] = recolorNote
         setNotes(updateNotes)
@@ -129,27 +127,9 @@ export default function NoteCard( {note, notes, setNotes} ) {
                     <RiDeleteBin2Line  title='Delete note' />
                 </IconButton>
                 {
-                    note.state > 0 && 
-                    <IconButton onClick={() => handleToChangeState(note.id, note.state - 1)}    >
-                        <RiArrowGoBackFill title='Back'/>
-                    </IconButton>
-                }
-                {
                     note.state === 0 &&  
                     <IconButton  onClick={() => handleToChangeState(note.id, 1)}>
-                        <BsKanban title='Add todo list'/>
-                    </IconButton>
-                }
-                {
-                    note.state === 1 && 
-                    <IconButton onClick={() => handleToChangeState(note.id, 2)} >
-                        <FiPlay title='Get started'/>
-                    </IconButton>
-                }
-                {
-                    note.state === 2 && 
-                    <IconButton onClick={() => handleToChangeState(note.id, 3)} >
-                        <MdDone title='Done' />
+                        <BsKanban title='Add to-do'/>
                     </IconButton>
                 }
             </CardContent>

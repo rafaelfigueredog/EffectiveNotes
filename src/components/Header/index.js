@@ -4,7 +4,8 @@ import { Typography, makeStyles, AppBar, Toolbar, IconButton, Button } from '@ma
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import {BsLightning} from 'react-icons/bs'; 
-import {BsKanban} from 'react-icons/bs'
+import {BsKanban} from 'react-icons/bs';
+import {Badge} from '@material-ui/core'; 
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => {
     }
 })
 
-export default function Header( {paletteType, setPaletteType, mode, setMode} ) {
+export default function Header( {paletteType, setPaletteType, mode, setMode, onKanban} ) {
     const classes = useStyles(); 
     return (
         <AppBar className={classes.AppBar} elevation={0} >
@@ -57,7 +58,9 @@ export default function Header( {paletteType, setPaletteType, mode, setMode} ) {
                 </IconButton>
 
                 <IconButton onClick={() => setMode(1)} title='Productive' >
-                    <BsKanban className={ mode? classes.activeIcon : null }/>
+                    <Badge color="secondary" badgeContent={onKanban}>
+                        <BsKanban className={ mode? classes.activeIcon : null }/>
+                    </Badge>
                 </IconButton> 
 
                  <IconButton onClick={() => setMode(0)}  title='Brainstorming' >

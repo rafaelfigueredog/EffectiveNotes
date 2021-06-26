@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-export default function BrainStormView({ notes, setNotes }) {
+export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban }) {
 
   const [brainstorming, setBrainstorming] = useState(notes.filter(note => note.state === 0)); 
 
@@ -31,6 +31,8 @@ export default function BrainStormView({ notes, setNotes }) {
                       note={note} 
                       notes={notes}
                       setNotes={setNotes}
+                      onKanban={onKanban}
+                      setOnKanban={setOnKanban}
                     />
               </Grid>
             ))}

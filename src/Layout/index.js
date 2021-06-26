@@ -22,26 +22,12 @@ export default function Layout( {paletteType, setPaletteType} ) {
     const classes = useStyles(); 
     const [notes, setNotes] = useState([])
     const [mode, setMode] = useState(0); 
-
-
-    const Body = () => {
-      return (
-         !mode? 
-          <BrainStormView 
-              notes={notes} 
-              setNotes={setNotes} 
-          /> : 
-          <ProductiveView 
-              notes={notes} 
-              setNotes={setNotes}
-          />
-      ); 
-    }
-
+    const [onKanban, setOnKanban] = useState(0);  
+ 
 
     useEffect(() => {
       fetch('http://localhost:8000/notes')
-        .then(response => response.json())
+    .then(response => response.json())
         .then(data => setNotes(data)); 
     }, [])
   
@@ -54,9 +40,34 @@ export default function Layout( {paletteType, setPaletteType} ) {
   
     return (
         <div className={classes.root}>
-            <Header notes={notes} paletteType={paletteType} setPaletteType={setPaletteType} mode={mode} setMode={setMode} /> 
-            <CreateNote notes={notes} setNotes={setNotes}  mode={mode} />
-            <Body /> 
+            <Header 
+                notes={notes} 
+                paletteType={paletteType} 
+                setPaletteType={setPaletteType} 
+                mode={mode} 
+                setMode={setMode}
+                onKanban={onKanban}
+            /> 
+            <CreateNote 
+                notes={notes} 
+                setNotes={setNotes}  
+                mode={mode} 
+            />
+            {
+                !mode? 
+                <BrainStormView 
+                    notes={notes} 
+                    setNotes={setNotes} 
+                    onKanban={onKanban}
+                    setOnKanban={setOnKanban}
+                /> : 
+                <ProductiveView 
+                    notes={notes} 
+                    setNotes={setNotes}
+                    onKanban={onKanban}
+                    setOnKanban={setOnKanban}
+                />
+            }
         </div>
     )
 }

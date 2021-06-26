@@ -10,7 +10,7 @@
 .column {
     float: left;
     width: 33.33%;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
 }
 
