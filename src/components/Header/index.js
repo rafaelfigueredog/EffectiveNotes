@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => {
             color: theme.palette.type === 'dark' ?
                    theme.palette.primary.main :
                    theme.palette.secondary.main 
-        }
+        },
     }
 })
 
@@ -54,11 +54,11 @@ export default function Header( {paletteType, setPaletteType, mode, setMode, onK
                 
            
                 <IconButton onClick={() => setPaletteType(!paletteType)} title='theme' >
-                    { paletteType? <Brightness4Icon /> : <Brightness7Icon /> }
+                    { paletteType?  <Brightness4Icon /> : <Brightness7Icon /> }
                 </IconButton>
 
                 <IconButton onClick={() => setMode(1)} title='Productive' >
-                    <Badge color="secondary" badgeContent={onKanban}>
+                    <Badge color={paletteType? 'secondary' : 'primary' } badgeContent={onKanban}>
                         <BsKanban className={ mode? classes.activeIcon : null }/>
                     </Badge>
                 </IconButton> 

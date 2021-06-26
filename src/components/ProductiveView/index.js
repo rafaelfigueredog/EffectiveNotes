@@ -97,7 +97,7 @@ const onDragEnd = (result, columns, setColumns) => {
   }
 };
 
-export default function ProductiveView({notes, setNotes, onKanban, setOnKanban}) {
+export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, paletteType}) {
   
   const [columns, setColumns] = useState({});
   const classes = useStyles();
@@ -133,7 +133,7 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban})
                         className={classes.containerNotes}
                         style={{
                           background: snapshot.isDraggingOver
-                            ? '#f5f5f5'
+                            ? paletteType? '#f5f5f5' : '#424242'
                             : null,
                         }} 
                       >

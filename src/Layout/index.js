@@ -66,6 +66,7 @@ export default function Layout( {paletteType, setPaletteType} ) {
                     setNotes={setNotes}
                     onKanban={onKanban}
                     setOnKanban={setOnKanban}
+                    paletteType={paletteType}
                 />
             }
         </div>
