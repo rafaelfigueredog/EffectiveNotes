@@ -12,7 +12,6 @@ import {BsKanban} from 'react-icons/bs'
 import {BsCheckCircle} from 'react-icons/bs'
 import {RiArrowGoBackFill} from 'react-icons/ri'
 import palette from './palette'
-import { set } from 'date-fns';
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -21,6 +20,7 @@ const useStyles = makeStyles((theme) => {
                                         note.color.light : 
                                         note.color.dark, 
             width: 300, 
+            
         },  
         containerIcons: {
             display: 'flex',  
