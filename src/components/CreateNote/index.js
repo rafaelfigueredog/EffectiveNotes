@@ -57,20 +57,17 @@ export default function CreateNote({ notes, setNotes, mode }) {
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(buildNote) 
           })
-        }
 
+          /* Local Storage */
+          localStorage.setItem('notes', JSON.stringify([...notes, buildNote])); 
+        }
         setDetails(''); 
         setTitle(''); 
     }
-
     const classes = useStyles();
-
     return (
-
       <Card className={classes.root} elevation={title? 3 : 0 } > 
-
         <form noValidate autoComplete="off"  onSubmit={handleToSubmit} id="create-note" >
-        
           <CardContent>
             <InputBase
               className={classes.input}
@@ -80,7 +77,6 @@ export default function CreateNote({ notes, setNotes, mode }) {
               required
             />
           </CardContent>
-
           {
             title && 
             <CardContent>
@@ -94,7 +90,6 @@ export default function CreateNote({ notes, setNotes, mode }) {
               />  
             </CardContent>
           }
-
           { title && 
             <CardActions className='button' > 
               <Button size="small" type='submit' >

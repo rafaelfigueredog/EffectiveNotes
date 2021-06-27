@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => {
           alignItems: 'flex-start',
           justifyContent: 'center'
       },
+      containerNotes: {
+        width: '80%'
+      }, 
       toolbar: theme.mixins.toolbar, 
       
   }
@@ -19,10 +22,10 @@ const useStyles = makeStyles((theme) => {
 
 export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban }) {
 
-  const [brainstorming, setBrainstorming] = useState(notes.filter(note => note.state === 0)); 
+  const [brainstorming, setBrainstorming] = useState(notes? notes.filter(note => note.state === 0) : []); 
 
   useEffect(() => {
-    setBrainstorming(notes.filter(note => note.state === 0))
+    setBrainstorming(notes? notes.filter(note => note.state === 0) : [])
   }, [notes])
 
   const classes = useStyles()
@@ -36,7 +39,7 @@ export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban 
 
   return (
     <div className={classes.page} >
-      <div>
+      <div className={classes.containerNotes}   >
             <Masonry 
               breakpointCols={breakpoints}
               className="my-masonry-grid"

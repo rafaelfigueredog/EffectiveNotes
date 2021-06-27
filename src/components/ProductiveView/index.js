@@ -80,6 +80,9 @@ const onDragEnd = (result, columns, setColumns, notes, setNotes, setChangeOnDrag
     updateNotes[index] = noteToUpdate; 
     setChangeOnDrag(true); 
     setNotes(updateNotes)
+    
+    /* Local Storage */
+    localStorage.setItem('notes', JSON.stringify(notes)); 
 
     destItems.splice(destination.index, 0, removed);
     setColumns({

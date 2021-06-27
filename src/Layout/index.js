@@ -14,9 +14,6 @@ const useStyles = makeStyles({
     }, 
 })
 
-
-
-
 export default function Layout( {paletteType, setPaletteType} ) {
 
     const classes = useStyles(); 
@@ -26,16 +23,13 @@ export default function Layout( {paletteType, setPaletteType} ) {
  
 
     useEffect(() => {
-      fetch('http://localhost:8000/notes')
-    .then(response => response.json())
-        .then(data => setNotes(data)); 
+        if (localStorage.getItem("notes") === null) {
+            return; 
+        }
+        const data = JSON.parse(localStorage.getItem('notes'));
+        setNotes(data); 
     }, [])
   
-    
-    useEffect(() => {
-      fetch('http://localhost:8000/notes')
-        .then(response => response.json())
-    }, [notes] )
   
   
     return (

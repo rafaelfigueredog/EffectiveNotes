@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => {
                                         note.color.light : 
                                         note.color.dark, 
             width: 300, 
-            
         },  
         containerIcons: {
             display: 'flex',  
@@ -43,7 +42,10 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
         const updatedNotes = notes.filter(note => note.id !== id); 
         setNotes(updatedNotes); 
     
-        // update de database
+        /* Local Storage */
+        localStorage.setItem("notes", JSON.stringify(updatedNotes)); 
+
+        // update de database local
         await fetch('http://localhost:8000/notes/' + id, { method: 'DELETE' }) 
     }
   
@@ -56,12 +58,14 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
         updateNotes[index] = noteToUpdate; 
         setNotes(updateNotes)
         setOnKanban((onKanban + 1)); 
+        
+        /* Local Storage */
+        localStorage.setItem("notes", JSON.stringify(updateNotes)); 
     }
     
     const handleUpdateNotesColor = async (noteId, indexColor) => {
         
         console.log(noteId, indexColor); 
-
         const index = notes.findIndex(note => note.id === noteId); 
         const { id, title, date, details, state } = notes[index];  
         const colorObject = palette[indexColor]
@@ -80,6 +84,8 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
         updateNotes[index] = recolorNote
         setNotes(updateNotes)
         
+        /* Local Storage */
+        localStorage.setItem('notes', JSON.stringify(notes)); 
     
         // update database;
         await fetch('http://localhost:8000/notes/' + noteId, {
