@@ -1,12 +1,19 @@
-import React, {useState } from 'react'
+import React, {useState, useEffect } from 'react'
 import {createMuiTheme, ThemeProvider} from '@material-ui/core'
 import Layout from './Layout';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 
-function App() {
 
-  const [paletteType, setPaletteType] = useState(false)
+function App() {
+  const getPaletteType = () => {
+    return JSON.parse( localStorage.getItem('palette') || true ) ;
+  }
+  const [paletteType, setPaletteType] = useState(getPaletteType())
+
+  useEffect(() => {
+      localStorage.setItem('palette', paletteType); 
+  }, [paletteType])
 
   const theme = createMuiTheme({
     palette: {

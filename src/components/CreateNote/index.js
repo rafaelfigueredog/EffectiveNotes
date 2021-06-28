@@ -50,7 +50,7 @@ export default function CreateNote({ notes, setNotes, mode }) {
           setColor( getRandonColor( palette, color ))
           setDate(format( new Date(),  'do MMMM Y'))
           const buildNote = { title, details, date, color,  id: uuidv4(), state }
-          setNotes([...notes, buildNote]); 
+          setNotes([buildNote, ...notes]); 
 
           fetch('http://localhost:8000/notes', {
             method: 'POST', 
@@ -59,7 +59,7 @@ export default function CreateNote({ notes, setNotes, mode }) {
           })
 
           /* Local Storage */
-          localStorage.setItem('notes', JSON.stringify([...notes, buildNote])); 
+          localStorage.setItem('notes', JSON.stringify([buildNote, ...notes])); 
         }
         setDetails(''); 
         setTitle(''); 
