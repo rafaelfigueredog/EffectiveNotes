@@ -23,9 +23,9 @@ export default function Layout( {paletteType, setPaletteType} ) {
  
 
     useEffect(() => {
-        const notesFromBackEnd = JSON.parse(localStorage.getItem('notes') || []);
-        const modeFromBackEnd = (JSON.parse(localStorage.getItem('mode')) || 0);
-        const onKanbanFromBackEnd = (JSON.parse(localStorage.getItem('onKanban')) || 0); 
+        const notesFromBackEnd = JSON.parse(localStorage.getItem('notes')) || []; 
+        const modeFromBackEnd = JSON.parse(localStorage.getItem('mode')) || 0;
+        const onKanbanFromBackEnd = JSON.parse(localStorage.getItem('onKanban')) || 0; 
         setOnKanban(onKanbanFromBackEnd);
         setNotes(notesFromBackEnd); 
         setMode(modeFromBackEnd);
