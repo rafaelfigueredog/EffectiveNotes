@@ -10,7 +10,6 @@ import {RiPaletteLine} from 'react-icons/ri'
 import {RiDeleteBin2Line} from 'react-icons/ri'
 import {BsKanban} from 'react-icons/bs'
 import {BsCheckCircle} from 'react-icons/bs'
-import {RiArrowGoBackFill} from 'react-icons/ri'
 import {Tooltip} from '@material-ui/core';
 import palette from './palette'
 
@@ -46,9 +45,6 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
     
         /* Local Storage */
         localStorage.setItem("notes", JSON.stringify(updatedNotes)); 
-
-        // update de database local
-        await fetch('http://localhost:8000/notes/' + id, { method: 'DELETE' }) 
     }
   
   
@@ -89,19 +85,6 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
         
         /* Local Storage */
         localStorage.setItem('notes', JSON.stringify(notes)); 
-    
-        // update database;
-        await fetch('http://localhost:8000/notes/' + noteId, {
-            method: 'PUT', 
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(recolorNote)
-          }).then(response => response.JSON())
-            .then(data => {
-            }).catch( (error) => {
-              console.error(error)
-        })
     }
 
     const selectColor = (idColor) => {

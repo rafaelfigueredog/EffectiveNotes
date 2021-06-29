@@ -52,12 +52,6 @@ export default function CreateNote({ notes, setNotes, mode }) {
           const buildNote = { title, details, date, color,  id: uuidv4(), state }
           setNotes([buildNote, ...notes]); 
 
-          fetch('http://localhost:8000/notes', {
-            method: 'POST', 
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(buildNote) 
-          })
-
           /* Local Storage */
           localStorage.setItem('notes', JSON.stringify([buildNote, ...notes])); 
         }
