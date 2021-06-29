@@ -69,7 +69,6 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
     
     const handleUpdateNotesColor = async (noteId, indexColor) => {
         
-        console.log(noteId, indexColor); 
         const index = notes.findIndex(note => note.id === noteId); 
         const { id, title, date, details, state } = notes[index];  
         const colorObject = palette[indexColor]
@@ -100,7 +99,6 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
             body: JSON.stringify(recolorNote)
           }).then(response => response.JSON())
             .then(data => {
-              console.log('Success:', data)
             }).catch( (error) => {
               console.error(error)
         })
