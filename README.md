@@ -19,26 +19,22 @@ $ yarn install
 $ yarn start 
 ```
 
-**Back end**
-
-Open a second instance of the terminal and go to the repository folder, run the following command: 
-```console
-$ npm i json-server
-$ json-server --watch src/database/db.json --port 8000
-```
-
 ## Features
 
 - Create a Note
 - Delete Note
-- Update the color note
-- Dark Theme
+- Select color note
+- Switch Theme
 - Dynamic form for create notes 
+- Productive Mode (Kanban)
+- Brainstorming Mode (save your ideas)
 
 ## Future features
 
 - Create category for notes. 
 - Edit an existent note
+- Add CheckList in note
+- Trash
 
 ## Licence
 Effective Notes is [MIT licensed](https://github.com/rafaelfigueredog/effectiveNotes/blob/main/LICENSE).
