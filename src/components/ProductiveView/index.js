@@ -130,6 +130,7 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
 
   if ( onKanban ) {
     setOnKanban(0); 
+    localStorage.setItem('onKanban', JSON.stringify(0));
   }
   
   return (
@@ -146,7 +147,7 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
         {Object.entries(columns).map(([columnId, column], index) => {
             return (
               <div
-                class='column'
+                className='column'
                 key={columnId}
               >
                 <Droppable droppableId={columnId} key={columnId}>

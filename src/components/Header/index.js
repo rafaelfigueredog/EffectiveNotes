@@ -6,6 +6,7 @@ import Brightness4Icon from '@material-ui/icons/Brightness4'
 import {BsLightning} from 'react-icons/bs'; 
 import {BsKanban} from 'react-icons/bs';
 import {Badge} from '@material-ui/core'; 
+import ToolTip from '@material-ui/core/Tooltip'
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -41,6 +42,17 @@ const useStyles = makeStyles((theme) => {
 
 export default function Header( {paletteType, setPaletteType, mode, setMode, onKanban} ) {
     const classes = useStyles(); 
+
+    const handleToProductive = () => {
+        setMode(1); 
+        localStorage.setItem('mode', JSON.stringify(1)); 
+    }
+
+    const handleToBrainstorming = () => {
+        localStorage.setItem('mode', JSON.stringify(0)); 
+        setMode(0); 
+    }
+    
     return (
         <AppBar className={classes.AppBar} elevation={0} >
             <Toolbar>
@@ -52,18 +64,25 @@ export default function Header( {paletteType, setPaletteType, mode, setMode, onK
                     </span>
                 </Typography>  
            
-                <IconButton onClick={() => setPaletteType(!paletteType)} title='theme' >
-                    { paletteType?  <Brightness4Icon /> : <Brightness7Icon /> }
-                </IconButton>
+                <ToolTip title={!paletteType? 'light theme' : 'dark theme'} >
+                    <IconButton onClick={() => setPaletteType(!paletteType)} >
+                        { paletteType?  <Brightness4Icon /> : <Brightness7Icon /> }
+                    </IconButton>
+                </ToolTip>
 
-                <IconButton onClick={() => setMode(1)} title='Productive' >
-                    <Badge color={paletteType? 'secondary' : 'primary' } badgeContent={onKanban}>
-                        <BsKanban className={ mode? classes.activeIcon : null }/>
-                    </Badge>
-                </IconButton> 
-                <IconButton onClick={() => setMode(0)}  title='Brainstorming' >
-                    <BsLightning className={ !mode? classes.activeIcon : null }/>
-                </IconButton>                    
+                <ToolTip title='Productive'>
+                    <IconButton onClick={() => handleToProductive()}  >
+                        <Badge color={paletteType? 'secondary' : 'primary' } badgeContent={onKanban}>
+                            <BsKanban className={ mode? classes.activeIcon : null }/>
+                        </Badge>
+                    </IconButton> 
+                </ToolTip>  
+
+                <ToolTip title='Brainstorming'>
+                    <IconButton onClick={() => handleToBrainstorming()} >
+                        <BsLightning className={ !mode? classes.activeIcon : null }/>
+                    </IconButton>
+                </ToolTip>                    
             </Toolbar>
         </AppBar>
     )

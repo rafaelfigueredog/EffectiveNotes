@@ -23,11 +23,12 @@ export default function Layout( {paletteType, setPaletteType} ) {
  
 
     useEffect(() => {
-        if (localStorage.getItem("notes") === null) {
-            return; 
-        }
-        const data = JSON.parse(localStorage.getItem('notes'));
-        setNotes(data); 
+        const notesFromBackEnd = JSON.parse(localStorage.getItem('notes') || []);
+        const modeFromBackEnd = (JSON.parse(localStorage.getItem('mode')) || 0);
+        const onKanbanFromBackEnd = (JSON.parse(localStorage.getItem('onKanban')) || 0); 
+        setOnKanban(onKanbanFromBackEnd);
+        setNotes(notesFromBackEnd); 
+        setMode(modeFromBackEnd);
     }, [])
   
   

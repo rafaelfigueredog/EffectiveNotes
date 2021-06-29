@@ -5,13 +5,15 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import { CircularProgress, makeStyles } from '@material-ui/core';
-import { RiPaletteLine } from 'react-icons/ri'
+import {makeStyles} from '@material-ui/core';
+import {RiPaletteLine} from 'react-icons/ri'
 import {RiDeleteBin2Line} from 'react-icons/ri'
 import {BsKanban} from 'react-icons/bs'
 import {BsCheckCircle} from 'react-icons/bs'
 import {RiArrowGoBackFill} from 'react-icons/ri'
+import {Tooltip} from '@material-ui/core';
 import palette from './palette'
+
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -59,7 +61,9 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
         setNotes(updateNotes)
         setOnKanban((onKanban + 1)); 
         
+        
         /* Local Storage */
+        localStorage.setItem("onKanban", JSON.stringify(onKanban+1)); 
         localStorage.setItem("notes", JSON.stringify(updateNotes)); 
     }
     
@@ -135,16 +139,23 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
                 </CardContent>
             }
             <CardContent className={classes.containerIcons} >
-                <PopoverColors  icon={<RiPaletteLine title='Select color'/>} palette={palette} selectColor={selectColor}  />
-                <IconButton  onClick={() => handleToDelete(note.id)} >
-                    <RiDeleteBin2Line  title='Delete note' />
-                </IconButton>
+                
+                <PopoverColors  icon={<RiPaletteLine />} palette={palette} selectColor={selectColor} noteColor={note.color}  />
+               
+                <Tooltip title='Delete' placement='bottom-start' >
+                    <IconButton  onClick={() => handleToDelete(note.id)} >
+                        <RiDeleteBin2Line  title='Delete note' />
+                    </IconButton>
+                </Tooltip>
+
                 {
                     note.state === 0 &&  
-                    <IconButton  onClick={() => handleToChangeState(note.id, 1)}>
-                        <BsKanban title='Add to-do'/>
-                    </IconButton>
-                }
+                    <Tooltip title='Add in to-do' placement='bottom-start' >
+                        <IconButton  onClick={() => handleToChangeState(note.id, 1)}>
+                            <BsKanban />
+                        </IconButton>
+                    </Tooltip>
+                }   
             </CardContent>
        </Card>
     )
