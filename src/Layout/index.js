@@ -55,6 +55,7 @@ export default function Layout( {paletteType, setPaletteType} ) {
                     setNotes={setNotes} 
                     onKanban={onKanban}
                     setOnKanban={setOnKanban}
+                    theme={paletteType}
                 /> : 
                 <ProductiveView 
                     notes={notes} 
