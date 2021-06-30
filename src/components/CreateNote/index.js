@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import format from 'date-fns/format'
 import '../../styles.css'; 
 import palette from '../NoteCard/palette'
+import { Fade } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -73,23 +74,35 @@ export default function CreateNote({ notes, setNotes, mode }) {
           </CardContent>
           {
             title && 
-            <CardContent>
-              <InputBase
-                  onChange={(e) => {
-                    setDetails(e.target.value) 
-                  }}
-                  className={classes.input}
-                  placeholder="Note Details"
-                  inputProps={{ maxLength: 130 }}
-              />  
-            </CardContent>
+            <Fade 
+              in={title}
+              style={{ transformOrigin: '0 0 0' }}
+              {...(title? { timeout: 500 } : {})}         
+            >
+              <CardContent>
+                <InputBase
+                    onChange={(e) => {
+                      setDetails(e.target.value) 
+                    }}
+                    className={classes.input}
+                    placeholder="Note Details"
+                    inputProps={{ maxLength: 130 }}
+                />  
+              </CardContent>
+            </Fade>
           }
           { title && 
-            <CardActions className='button' > 
-              <Button size="small" type='submit' >
-                  create  
-              </Button>
-            </CardActions>
+            <Fade 
+              in={title}
+              style={{ transformOrigin: '0 0 0' }}
+              {...(title? { timeout: 1000 } : {})}         
+            >
+              <CardActions className='button' > 
+                <Button size="small" type='submit' >
+                    create  
+                </Button>
+              </CardActions>
+            </Fade>
           }
         </form>
       </Card>

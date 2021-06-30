@@ -50,7 +50,7 @@ export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban,
       <Fade  
         in={ShowIllustration()} 
         style={{ transformOrigin: '0 0 0' }}
-        {...(ShowIllustration() ? { timeout: 1000 } : {})}
+        {...(ShowIllustration() ? { timeout: 500 } : {})}
       >
         <IllustrationDark width={400} height={400} />
       </Fade>
@@ -62,7 +62,7 @@ export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban,
       <Fade  
         in={ShowIllustration()} 
         style={{ transformOrigin: '0 0 0' }}
-        {...(ShowIllustration() ? { timeout: 1000 } : {})}
+        {...(ShowIllustration() ? { timeout: 500 } : {})}
       >
         <IllustrationLight width={400} height={400} />
       </Fade>

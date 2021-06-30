@@ -158,7 +158,7 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
       <Fade  
         in={empty}
         style={{ transformOrigin: '0 0 0' }}
-        {...(empty ? { timeout: 1000 } : {})}         
+        {...(empty ? { timeout: 500 } : {})}         
       >
         <IllustrationDark width={400} height={400} />
       </Fade>
@@ -170,7 +170,7 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
       <Fade  
         in={empty}
         style={{ transformOrigin: '0 0 0' }}
-        {...(empty ? { timeout: 1000 } : {})}          
+        {...(empty ? { timeout: 500 } : {})}          
       >
         <IllustrationLight width={400} height={400} />
       </Fade>
