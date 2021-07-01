@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => {
     return {
         AppBar: {
             display: 'flex',
-            backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa' 
+            backgroundColor: theme.palette.background.default, 
         },
         date: {
             flexGrow: 1, 

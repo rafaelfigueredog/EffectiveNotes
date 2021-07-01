@@ -18,8 +18,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(15), 
     marginButton: theme.spacing(5),
     marginLeft: 'auto', 
-    marginRight: 'auto', 
-    backgroundColor: theme.palette.type === 'dark' ? '#303030' : '#fafafa', 
+    marginRight: 'auto',  
   }, 
   title: {
     fontSize: 14,
@@ -59,7 +58,7 @@ export default function CreateNote({ notes, setNotes, mode }) {
         setDetails(''); 
         setTitle(''); 
     }
-    const classes = useStyles();
+    const classes = useStyles(title);
     return (
       <Card className={classes.root} elevation={title? 3 : 0 } > 
         <form noValidate autoComplete="off"  onSubmit={handleToSubmit} id="create-note" >

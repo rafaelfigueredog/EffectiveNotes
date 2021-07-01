@@ -26,6 +26,10 @@ function App() {
         main: '#3d5afe',
       },
       type: paletteType? 'light' : 'dark', 
+      background: {
+        default: paletteType? '#FAFAFA' : '#212324' ,  
+        paper: paletteType? '#FAFAFA' : '#212324' ,
+      }
     },
     typography: {
       fontFamily: 'Poppins', 
@@ -34,6 +38,7 @@ function App() {
       fontWeightMedium: 500, 
       fontWeightBold: 600
     }, 
+    
   });
 
   return (
