@@ -1,0 +1,31 @@
+{
+    "name": "Português", 
+
+    "create": {
+        "take_note": "Escrever uma nota",
+        "title": "Título",
+        "details": "Detalhes",
+        "create": "Criar"
+    },
+
+    "note_actions": {
+        "change_color": "Selecionar cor", 
+        "delete": "Apagar",
+        "add_todo": "Inserir em lista de atividades"
+    },
+
+    "header_actions": {
+        "dark_theme": "Tema escuro", 
+        "light_theme": "Tema claro",
+        "language": "Selecionar idioma",
+        "productive": "Produtivo, Quadro Kanban", 
+        "brainstorming": "Tempestade de idéias"
+    },
+
+
+    "kanban": {
+        "todo": "A fazer",
+        "doing": "Fazendo",
+        "done": "Feito"
+    }
+}

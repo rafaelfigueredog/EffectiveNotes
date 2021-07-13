@@ -1,0 +1,31 @@
+{   
+    "name": "English", 
+
+    "create": {
+        "take_note": "Take a note",
+        "title": "Title",
+        "details": "Details",
+        "create": "Create"
+    },
+
+    "note_actions": {
+        "change_color": "Change color", 
+        "delete": "Delete",
+        "add_todo": "Add to-do list"
+    },
+
+    "header_actions": {
+        "dark_theme": "Dark theme", 
+        "light_theme": "Light theme",
+        "language": "Select language",
+        "productive": "Productive", 
+        "brainstorming": "Brainstorming"
+    },
+
+
+    "kanban": {
+        "todo": "To-do",
+        "doing": "Doing",
+        "done": "Done"
+    }
+}

@@ -1,12 +1,22 @@
 import React from 'react'
-import logoIcon from '../../assets/img/logo.png'
-import { Typography, makeStyles, AppBar, Toolbar, IconButton, Button } from '@material-ui/core'
+
+import {makeStyles} from '@material-ui/core'
+import Typography from '@material-ui/core/Typography'
+import Tooltip  from '@material-ui/core/Tooltip'
+import AppBar  from '@material-ui/core/AppBar'
+import Toolbar  from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
+import Badge from '@material-ui/core/Badge';
+
 import {BsLightning} from 'react-icons/bs'; 
 import {BsKanban} from 'react-icons/bs';
-import {Badge} from '@material-ui/core'; 
-import ToolTip from '@material-ui/core/Tooltip'
+import {IoLanguageOutline} from 'react-icons/io5'
+
+import logoIcon from '../../assets/img/logo.png'
+import PopoverSelect from '../PopoverSelect'
+
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -37,10 +47,16 @@ const useStyles = makeStyles((theme) => {
                    theme.palette.primary.main :
                    theme.palette.secondary.main 
         },
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: 120,
+        },
     }
 })
 
-export default function Header( {paletteType, setPaletteType, mode, setMode, onKanban} ) {
+
+
+export default function Header( {paletteType, setPaletteType, mode, setMode, onKanban, language} ) {
     const classes = useStyles(); 
 
     const handleToProductive = () => {
@@ -52,7 +68,8 @@ export default function Header( {paletteType, setPaletteType, mode, setMode, onK
         localStorage.setItem('mode', JSON.stringify(0)); 
         setMode(0); 
     }
-    
+
+
     return (
         <AppBar className={classes.AppBar} elevation={0} >
             <Toolbar>
@@ -60,29 +77,35 @@ export default function Header( {paletteType, setPaletteType, mode, setMode, onK
                 <Typography variant='h6' color='textSecondary'className={classes.date}>
                     Effective
                     <span> 
-                        <Typography> Notes </Typography>
+                        <Typography > Notes </Typography>
                     </span>
                 </Typography>  
+
+                <Tooltip title={language.header_actions.language} >
+                    <IconButton onClick={() => <PopoverSelect />} >
+                        <IoLanguageOutline />
+                    </IconButton>
+                </Tooltip>
            
-                <ToolTip title={!paletteType? 'light theme' : 'dark theme'} >
+                <Tooltip title={!paletteType? language.header_actions.light_theme : language.header_actions.dark_theme } >
                     <IconButton onClick={() => setPaletteType(!paletteType)} >
                         { paletteType?  <Brightness4Icon /> : <Brightness7Icon /> }
                     </IconButton>
-                </ToolTip>
+                </Tooltip>
 
-                <ToolTip title='Productive'>
+                <Tooltip title={language.header_actions.productive}>
                     <IconButton onClick={() => handleToProductive()}  >
                         <Badge color={paletteType? 'secondary' : 'primary' } badgeContent={onKanban}>
                             <BsKanban className={ mode? classes.activeIcon : null }/>
                         </Badge>
                     </IconButton> 
-                </ToolTip>  
+                </Tooltip>  
 
-                <ToolTip title='Brainstorming'>
+                <Tooltip title={language.header_actions.brainstorming}>
                     <IconButton onClick={() => handleToBrainstorming()} >
                         <BsLightning className={ !mode? classes.activeIcon : null }/>
                     </IconButton>
-                </ToolTip>                    
+                </Tooltip>                    
             </Toolbar>
         </AppBar>
     )

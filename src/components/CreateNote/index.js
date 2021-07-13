@@ -1,15 +1,18 @@
 import React, { useState }  from 'react';
+
 import makeStyles  from '@material-ui/core/styles/makeStyles';
 import InputBase from '@material-ui/core/InputBase';
-import { v4 as uuidv4 } from 'uuid';
+import Fade from '@material-ui/core/Fade';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+
 import format from 'date-fns/format'
+import { v4 as uuidv4 } from 'uuid';
+
 import '../../styles.css'; 
 import palette from '../NoteCard/palette'
-import { Fade } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +37,7 @@ const getRandonColor = (array, currentColor) => {
   return newColor; 
 }
 
-export default function CreateNote({ notes, setNotes, mode }) {
+export default function CreateNote({ notes, setNotes, mode, language }) {
 
     const [color, setColor] = useState(getRandonColor(palette, ""))
     const [title, setTitle] = useState('');
@@ -61,21 +64,21 @@ export default function CreateNote({ notes, setNotes, mode }) {
     }
     const classes = useStyles();
     return (
-      <Card className={classes.root} elevation={title? 3 : 0 } > 
+      <Card className={classes.root} elevation={title || details? 3 : 0 } > 
         <form noValidate autoComplete="off"  onSubmit={handleToSubmit} id="create-note" >
           <CardContent>
             <InputBase
               className={classes.input}
-              placeholder='Take a note here! 🖊'
+              placeholder={!details? language.create.take_note : language.create.title}
               onChange={(e) => setTitle(e.target.value) }
               inputProps={{ maxLength: 30 }}
               required
             />
           </CardContent>
           {
-            title && 
+            (title || details) &&
             <Fade 
-              in={title}
+              in={title || details}
               style={{ transformOrigin: '0 0 0' }}
               {...(title? { timeout: 500 } : {})}         
             >
@@ -85,21 +88,21 @@ export default function CreateNote({ notes, setNotes, mode }) {
                       setDetails(e.target.value) 
                     }}
                     className={classes.input}
-                    placeholder="Note Details"
+                    placeholder={language.create.details}
                     inputProps={{ maxLength: 130 }}
                 />  
               </CardContent>
             </Fade>
           }
-          { title && 
+          { (title || details) && 
             <Fade 
-              in={title}
+              in={title || details}
               style={{ transformOrigin: '0 0 0' }}
               {...(title? { timeout: 1000 } : {})}         
             >
               <CardActions className='button' > 
                 <Button size="small" type='submit' >
-                    create  
+                    {language.create.create}
                 </Button>
               </CardActions>
             </Fade>

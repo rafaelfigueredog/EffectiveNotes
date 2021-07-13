@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     }, 
 })
 
-export default function Layout( {paletteType, setPaletteType} ) {
+export default function Layout( {paletteType, setPaletteType, language, setLanguage} ) {
 
     const classes = useStyles(); 
     const [notes, setNotes] = useState([])
@@ -42,11 +42,14 @@ export default function Layout( {paletteType, setPaletteType} ) {
                 mode={mode} 
                 setMode={setMode}
                 onKanban={onKanban}
+                language={language}
+                setLanguage={setLanguage}
             /> 
             <CreateNote 
                 notes={notes} 
                 setNotes={setNotes}  
                 mode={mode} 
+                language={language}
             />
             {
                 !mode? 
@@ -56,6 +59,7 @@ export default function Layout( {paletteType, setPaletteType} ) {
                     onKanban={onKanban}
                     setOnKanban={setOnKanban}
                     theme={paletteType}
+                    language={language} 
                 /> : 
                 <ProductiveView 
                     notes={notes} 
@@ -63,6 +67,7 @@ export default function Layout( {paletteType, setPaletteType} ) {
                     onKanban={onKanban}
                     setOnKanban={setOnKanban}
                     paletteType={paletteType}
+                    language={language} 
                 />
             }
         </div>

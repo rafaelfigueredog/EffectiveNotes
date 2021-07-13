@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => {
 }); 
 
 
-export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban}) {
+export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban, language}) {
 
     const classes = useStyles(note)
 
@@ -121,17 +121,23 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban})
             }
             <CardContent className={classes.containerIcons} >
                 
-                <PopoverColors  icon={<RiPaletteLine />} palette={palette} selectColor={selectColor} noteColor={note.color}  />
+                <PopoverColors  
+                    icon={<RiPaletteLine />} 
+                    palette={palette} 
+                    selectColor={selectColor} 
+                    noteColor={note.color} 
+                    language={language} 
+                />
                
-                <Tooltip title='Delete' placement='bottom-start' >
+                <Tooltip title={language.note_actions.delete} placement='bottom-start' >
                     <IconButton  onClick={() => handleToDelete(note.id)} >
-                        <RiDeleteBin2Line  title='Delete note' />
+                        <RiDeleteBin2Line />
                     </IconButton>
                 </Tooltip>
 
                 {
                     note.state === 0 &&  
-                    <Tooltip title='Add in to-do' placement='bottom-start' >
+                    <Tooltip title={language.note_actions.add_todo} placement='bottom-start' >
                         <IconButton  onClick={() => handleToChangeState(note.id, 1)}>
                             <BsKanban />
                         </IconButton>

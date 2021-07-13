@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban, theme}) {
+export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban, theme, language}) {
 
   const [brainstorming, setBrainstorming] = useState(notes? notes.filter(note => note.state === 0) : []); 
 
@@ -94,6 +94,7 @@ export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban,
                           setNotes={setNotes} 
                           onKanban={onKanban}
                           setOnKanban={setOnKanban}
+                          language={language}
                       />
                   </div>
                 </Grow>

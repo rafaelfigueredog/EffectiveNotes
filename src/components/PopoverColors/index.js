@@ -8,17 +8,21 @@ const useStyles = makeStyles(theme => {
   return {
     icon: {
       width: theme.spacing(2.5), 
+    },
+    container: {
+      display: 'block',
+      width: 230
     }
   }
 })
 
-export default function PopoverColors( {icon, palette, selectColor, noteColor} ) {
+export default function PopoverColors( {icon, palette, selectColor, noteColor, language} ) {
   const classes = useStyles(); 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
-        <div>
-          <Tooltip title='Change color' placement='bottom-start' >
+        <div >
+          <Tooltip title={language.note_actions.change_color} placement='bottom-start' >
             <IconButton variant="contained" {...bindTrigger(popupState)} >
               {icon}
             </IconButton>
@@ -34,7 +38,7 @@ export default function PopoverColors( {icon, palette, selectColor, noteColor} )
               horizontal: 'center',
             }}
           >
-            {palette.map((color) => (
+            {palette.map((color, index) => (
               <IconButton key={color.id} onClick={() => {selectColor(color.id)}}  >
                 {
                   noteColor.id === color.id ? 

@@ -52,25 +52,6 @@ const TODO = uuidv4();
 const INPROGRESS = uuidv4(); 
 const DONE = uuidv4(); 
 
-const columnsFromBackEnd = (todo, inProgress, done) => {
-  return {
-    [TODO]: {
-      name: "To-do",
-      items: todo,
-      state: 1
-    }, 
-    [INPROGRESS]: {
-      name: "In Progress",
-      items: inProgress,
-      state: 2
-    },
-    [DONE]: {
-      name: "Done",
-      items: done, 
-      state: 3, 
-    }
-  };
-}
 
 const onDragEnd = (result, columns, setColumns, notes, setNotes, setChangeOnDrag) => {
   if (!result.destination) return;
@@ -122,8 +103,28 @@ const onDragEnd = (result, columns, setColumns, notes, setNotes, setChangeOnDrag
   }
 };
 
-export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, paletteType, mode}) {
+export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, paletteType, language}) {
   
+  const columnsFromBackEnd = (todo, inProgress, done) => {
+    return {
+      [TODO]: {
+        name: language.kanban.todo,
+        items: todo,
+        state: 1
+      }, 
+      [INPROGRESS]: {
+        name: language.kanban.doing,
+        items: inProgress,
+        state: 2
+      },
+      [DONE]: {
+        name: language.kanban.done,
+        items: done, 
+        state: 3, 
+      }
+    };
+  }
+
   const [columns, setColumns] = useState({});
   const [changeOnDrag, setChangeOnDrag] = useState(false);
   const [empty, setEmpty] = useState(true); 
@@ -242,6 +243,7 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
                                             setNotes={setNotes}
                                             onKanban={onKanban}
                                             setOnKanban={setOnKanban} 
+                                            language={language}
                                           />  
                                         </div>
                                       );
