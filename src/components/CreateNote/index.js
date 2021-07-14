@@ -48,14 +48,11 @@ export default function CreateNote({ notes, setNotes, mode, language }) {
     const handleToSubmit = (e) => {
         e.preventDefault(); 
         document.getElementById("create-note").reset(); 
-
         if (title || details) {
           setColor( getRandonColor( palette, color ))
           setDate(format( new Date(),  'do MMMM Y'))
           const buildNote = { title, details, date, color,  id: uuidv4(), state }
           setNotes([buildNote, ...notes]); 
-
-          /* Local Storage */
           localStorage.setItem('notes', JSON.stringify([buildNote, ...notes])); 
         }
         setDetails(''); 
