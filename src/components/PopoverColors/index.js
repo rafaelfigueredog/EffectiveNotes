@@ -7,12 +7,8 @@ import {RiCheckboxBlankCircleFill, RiCheckboxCircleFill} from 'react-icons/ri'
 const useStyles = makeStyles(theme => {
   return {
     icon: {
-      width: theme.spacing(2.5), 
+      width: theme.spacing(3), 
     },
-    container: {
-      display: 'block',
-      width: 230
-    }
   }
 })
 
@@ -23,11 +19,11 @@ export default function PopoverColors( {icon, palette, selectColor, noteColor, l
       {(popupState) => (
         <div >
           <Tooltip title={language.note_actions.change_color} placement='bottom-start' >
-            <IconButton variant="contained" {...bindTrigger(popupState)} >
+            <IconButton  {...bindTrigger(popupState)} >
               {icon}
             </IconButton>
           </Tooltip>
-          <Popover
+          <Popover className={classes.container}
             {...bindPopover(popupState)}
             anchorOrigin={{
               vertical: 'bottom',
@@ -38,7 +34,7 @@ export default function PopoverColors( {icon, palette, selectColor, noteColor, l
               horizontal: 'center',
             }}
           >
-            {palette.map((color, index) => (
+          {palette.map((color, index) => (
               <IconButton key={color.id} onClick={() => {selectColor(color.id)}}  >
                 {
                   noteColor.id === color.id ? 

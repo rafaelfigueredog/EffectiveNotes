@@ -4,25 +4,27 @@ import {createMuiTheme, ThemeProvider} from '@material-ui/core'
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Layout from './Layout';
-import english from './languages/en-us.json'; 
-import portuguese from './languages/pt-br.json'; 
+import languages from './languages';
 
 function App() {
   const getPaletteType = () => {
     return JSON.parse( localStorage.getItem('palette') || true ) ;
   }
-  const [paletteType, setPaletteType] = useState(getPaletteType())
-  const [language, setLanguage] = useState(portuguese);
 
-  const languageOptions = [english, portuguese]; 
-  
+  const getLanguage = () => {
+    const languageOption = localStorage.getItem('language') || 'English' ;
+    return languages[languageOption];
+  }
+
+  const [paletteType, setPaletteType] = useState(getPaletteType())
+  const [language, setLanguage] = useState(getLanguage());
 
   useEffect(() => {
       localStorage.setItem('palette', paletteType); 
   }, [paletteType])
 
   useEffect(() => {
-    localStorage.setItem('language', language); 
+    localStorage.setItem('language', language.value); 
   }, [language])
 
   const theme = createMuiTheme({

@@ -1,6 +1,6 @@
 {   
     "name": "English", 
-
+    "value": "English",
     "create": {
         "take_note": "Take a note",
         "title": "Title",
@@ -19,7 +19,17 @@
         "light_theme": "Light theme",
         "language": "Select language",
         "productive": "Productive", 
-        "brainstorming": "Brainstorming"
+        "brainstorming": "Brainstorming", 
+        "select_language": [
+            {
+                "value": "English", 
+                "name": "English"
+            }, 
+            {
+                "value": "Portuguese", 
+                "name": "Portuguese"
+            }
+        ]
     },
 
 

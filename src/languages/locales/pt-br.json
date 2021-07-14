@@ -1,6 +1,6 @@
 {
     "name": "Português", 
-
+    "value": "Portuguese", 
     "create": {
         "take_note": "Escrever uma nota",
         "title": "Título",
@@ -19,7 +19,17 @@
         "light_theme": "Tema claro",
         "language": "Selecionar idioma",
         "productive": "Produtivo, Quadro Kanban", 
-        "brainstorming": "Tempestade de idéias"
+        "brainstorming": "Tempestade de idéias",
+        "select_language": [
+            {
+                "value": "English", 
+                "name": "Inglês"
+            }, 
+            {
+                "value": "Portuguese", 
+                "name": "Português"
+            }
+        ]
     },
 
 

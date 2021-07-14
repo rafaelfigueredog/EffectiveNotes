@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {makeStyles} from '@material-ui/core'
+import makeStyles from '@material-ui/styles/makeStyles'
 import Typography from '@material-ui/core/Typography'
 import Tooltip  from '@material-ui/core/Tooltip'
 import AppBar  from '@material-ui/core/AppBar'
@@ -9,14 +9,16 @@ import IconButton from '@material-ui/core/IconButton'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Badge from '@material-ui/core/Badge';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Fade from '@material-ui/core/Fade';
 
 import {BsLightning} from 'react-icons/bs'; 
 import {BsKanban} from 'react-icons/bs';
 import {IoLanguageOutline} from 'react-icons/io5'
 
 import logoIcon from '../../assets/img/logo.png'
-import PopoverSelect from '../PopoverSelect'
-
+import languages from '../../languages'
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -56,10 +58,24 @@ const useStyles = makeStyles((theme) => {
 
 
 
-export default function Header( {paletteType, setPaletteType, mode, setMode, onKanban, language} ) {
+export default function Header( {paletteType, setPaletteType, mode, setMode, onKanban, language, setLanguage} ) {
     const classes = useStyles(); 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
 
-    const handleToProductive = () => {
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };  
+
+    const handleSelect = (updateLanguage) => {
+        setLanguage(languages[updateLanguage])
+    }
+
+    const handleToProductive = () => {  
         setMode(1); 
         localStorage.setItem('mode', JSON.stringify(1)); 
     }
@@ -69,6 +85,28 @@ export default function Header( {paletteType, setPaletteType, mode, setMode, onK
         setMode(0); 
     }
 
+    const LanguageMenu = () => {
+        return (
+            <Menu
+                id="fade-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={() => handleClose()}
+                TransitionComponent={Fade}
+            >
+
+                {language.header_actions.select_language.map((languageOption, index) => (
+                    <MenuItem 
+                        onClick={() => handleSelect(languageOption.value)}
+                        key={index}
+                    > 
+                        {languageOption.name}
+                    </MenuItem>
+                ))}
+            </Menu>
+        ); 
+    }
 
     return (
         <AppBar className={classes.AppBar} elevation={0} >
@@ -81,11 +119,12 @@ export default function Header( {paletteType, setPaletteType, mode, setMode, onK
                     </span>
                 </Typography>  
 
-                <Tooltip title={language.header_actions.language} >
-                    <IconButton onClick={() => <PopoverSelect />} >
+                <Tooltip title={language.header_actions.language}>
+                    <IconButton onClick={handleClick} aria-controls="fade-menu" aria-haspopup="true">
                         <IoLanguageOutline />
                     </IconButton>
                 </Tooltip>
+                <LanguageMenu />
            
                 <Tooltip title={!paletteType? language.header_actions.light_theme : language.header_actions.dark_theme } >
                     <IconButton onClick={() => setPaletteType(!paletteType)} >

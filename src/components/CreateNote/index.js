@@ -50,7 +50,7 @@ export default function CreateNote({ notes, setNotes, mode, language }) {
         e.preventDefault(); 
         document.getElementById("create-note").reset(); 
 
-        if (title) {
+        if (title || details) {
           setColor( getRandonColor( palette, color ))
           setDate(format( new Date(),  'do MMMM Y'))
           const buildNote = { title, details, date, color,  id: uuidv4(), state }

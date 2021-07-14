@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Fade, makeStyles } from "@material-ui/core/";
+import { Fade, makeStyles, Typography } from "@material-ui/core/";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Container from '@material-ui/core/Container';
-import Collapse from "@material-ui/core/Collapse";
-import Grow from '@material-ui/core/Grow'
 import { v4 as uuidv4 } from 'uuid';
 
-import {ReactComponent as IllustrationDark} from '../../assets/img/ProdIllustrationDark/Mediamodifier-Design.svg'
-import {ReactComponent as IllustrationLight} from '../../assets/img/ProdIllustrationLight/Mediamodifier-Design.svg'
+import Illustration from '../../assets/img/checkmark.png'
 import NoteCard from "../NoteCard";
+import languages from "../../languages";
 import '../../styles.css'
 
 const useStyles = makeStyles((theme) => {
   return {
     page: {
       marginTop: theme.spacing(5),
+      padding: 10, 
     },
     context: {
       marginTop: theme.spacing(5),
@@ -26,8 +25,8 @@ const useStyles = makeStyles((theme) => {
       flexGrow: 1, 
       textAlign: 'center', 
       color: theme.palette.type === 'dark'?
-             theme.palette.grey[300] :
-             theme.palette.grey[500],   
+             theme.palette.grey[100] :
+             theme.palette.grey[900],   
       marginBottom: theme.spacing(3), 
       marginTop: theme.spacing(3)
     }, 
@@ -43,8 +42,18 @@ const useStyles = makeStyles((theme) => {
       justifyContent: 'flex-start', 
       margin: theme.spacing(1), 
       minHeight: '100vh', 
-      borderRadius: 5,    
+      width: 300,  
+      flexFade: 1,
+      alignSelf: 'stretch',  
     },
+    titleboard: {
+      width: '100%',
+
+      backgroundColor: theme.palette.type === 'light'?
+                       theme.palette.grey[200] :
+                       theme.palette.grey[800], 
+      borderRadius: 3, 
+    }, 
   };
 });
 
@@ -108,17 +117,17 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
   const columnsFromBackEnd = (todo, inProgress, done) => {
     return {
       [TODO]: {
-        name: language.kanban.todo,
+        name: "todo",
         items: todo,
         state: 1
       }, 
       [INPROGRESS]: {
-        name: language.kanban.doing,
+        name: "doing",
         items: inProgress,
         state: 2
       },
       [DONE]: {
-        name: language.kanban.done,
+        name: "done",
         items: done, 
         state: 3, 
       }
@@ -126,6 +135,7 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
   }
 
   const [columns, setColumns] = useState({});
+  const [nameColumns, setNameColumns] = useState(languages.kanban)
   const [changeOnDrag, setChangeOnDrag] = useState(false);
   const [empty, setEmpty] = useState(true); 
 
@@ -136,16 +146,23 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
   }
 
   useEffect(() => {
+    setNameColumns(language.kanban)
+  }, [language])
+
+  useEffect(() => {
+
     if (changeOnDrag) {
       setChangeOnDrag(false); 
       return;
     }
+
     const todo = notes.filter(note => note.state === 1);
     const inProgress = notes.filter(note => note.state === 2); 
     const done = notes.filter(note => note.state === 3);
-    console.log(todo, inProgress, done); 
+
     setColumns(columnsFromBackEnd(todo, inProgress, done));
     setEmpty(ShowIllustration(todo, inProgress, done)); 
+
   }, [notes])
 
   if ( onKanban ) {
@@ -161,7 +178,7 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
         style={{ transformOrigin: '0 0 0' }}
         {...(empty ? { timeout: 500 } : {})}         
       >
-        <IllustrationDark width={400} height={400} />
+        <img src={Illustration} width={200} height={200} alt='' />
       </Fade>
     );
   }
@@ -173,7 +190,7 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
         style={{ transformOrigin: '0 0 0' }}
         {...(empty ? { timeout: 500 } : {})}          
       >
-        <IllustrationLight width={400} height={400} />
+        <img src={Illustration} width={200} height={200} alt='' />
       </Fade>
     );
   }
@@ -208,13 +225,11 @@ export default function ProductiveView({notes, setNotes, onKanban, setOnKanban, 
                             background: snapshot.isDraggingOver
                               ? paletteType? '#f5f5f5' : '#424242'
                               : null,
-                            flexFade: 1,
-                            alignSelf: 'stretch' 
                           }} 
                           
                         >
-                          <div>
-                            <h3 className={classes.subtitle}> {column.name} </h3>
+                          <div className={classes.titleboard} >
+                            <Typography variant='h6'className={classes.subtitle}> {nameColumns[column.name]} </Typography>
                           </div>
                           {
                             column.items.map((note, index) => {

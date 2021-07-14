@@ -1,12 +1,14 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react'
-import {makeStyles} from '@material-ui/core';
+
+import makeStyles from '@material-ui/styles/makeStyles';
 import Masonry from 'react-masonry-css'
 import Grow from '@material-ui/core/Grow'
 import Fade from '@material-ui/core/Fade'
-import '../../styles.css'
+
 import NoteCard from '../NoteCard';
-import {ReactComponent as IllustrationLight} from '../../assets/img/illustrationLight/Mediamodifier-Design.svg'
-import {ReactComponent as IllustrationDark} from '../../assets/img//illustrationDark/Mediamodifier-Design.svg'
+import Illustration from '../../assets/img/creativity.png'
+import '../../styles.css'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -52,7 +54,7 @@ export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban,
         style={{ transformOrigin: '0 0 0' }}
         {...(ShowIllustration() ? { timeout: 500 } : {})}
       >
-        <IllustrationDark width={400} height={400} />
+        <img src={Illustration} width={200} height={200} alt='' />
       </Fade>
     );
   }
@@ -64,7 +66,7 @@ export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban,
         style={{ transformOrigin: '0 0 0' }}
         {...(ShowIllustration() ? { timeout: 500 } : {})}
       >
-        <IllustrationLight width={400} height={400} />
+        <img src={Illustration} width={200} height={200} alt='' />
       </Fade>
     );
   }

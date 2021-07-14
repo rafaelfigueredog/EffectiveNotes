@@ -11,8 +11,7 @@
     float: left;
     width: 33.33%;
     height: max-content;
-    align-items: stretch;
-    justify-content: stretch;
+    display: inline-flex;
 }
 
 
@@ -39,8 +38,9 @@
 
 /* Media Query */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 960px) {
     .column {
       width: 100%;
     }
 }
+
