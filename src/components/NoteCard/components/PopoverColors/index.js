@@ -1,8 +1,15 @@
 import React from 'react';
+
 import Popover from '@material-ui/core/Popover';
+import IconButton  from '@material-ui/core/IconButton';
+import makeStyles  from '@material-ui/styles/makeStyles';
+import Tooltip  from '@material-ui/core/Tooltip';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-import { IconButton, makeStyles, Tooltip } from '@material-ui/core';
-import {RiCheckboxBlankCircleFill, RiCheckboxCircleFill} from 'react-icons/ri'
+
+import {RiCheckboxBlankCircleFill} from 'react-icons/ri'
+import {RiCheckboxCircleFill} from 'react-icons/ri'
+
+import palette from '../Palette'
 
 const useStyles = makeStyles(theme => {
   return {
@@ -12,7 +19,7 @@ const useStyles = makeStyles(theme => {
   }
 })
 
-export default function PopoverColors( {icon, palette, selectColor, noteColor, language} ) {
+export default function PopoverColors( {icon, selectColor, noteColor, language} ) {
   const classes = useStyles(); 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">

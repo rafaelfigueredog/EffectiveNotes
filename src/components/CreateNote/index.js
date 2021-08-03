@@ -12,7 +12,7 @@ import format from 'date-fns/format'
 import { v4 as uuidv4 } from 'uuid';
 
 import '../../styles.css'; 
-import palette from '../NoteCard/palette'
+import palette from '../NoteCard/components/Palette'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +41,8 @@ export default function CreateNote({ notes, setNotes, mode, language }) {
     const [color, setColor] = useState(getRandonColor(palette, ""))
     const [title, setTitle] = useState('');
     const [details, setDetails] = useState('');
+    
+    // TODO: Ajust Date
     const [date, setDate] = useState(format( new Date(),  'do MMMM Y')); 
     const state = !mode? 0 : 1; 
 

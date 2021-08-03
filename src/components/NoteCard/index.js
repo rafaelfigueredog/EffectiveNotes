@@ -1,17 +1,12 @@
 import React from 'react'
-import PopoverColors from '../PopoverColors';
+
 import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardContent from '@material-ui/core/CardContent'
-import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
-import {makeStyles} from '@material-ui/core';
-import {RiPaletteLine} from 'react-icons/ri'
-import {RiDeleteBin2Line} from 'react-icons/ri'
-import {BsKanban} from 'react-icons/bs'
-import {BsCheckCircle} from 'react-icons/bs'
-import {Tooltip} from '@material-ui/core';
-import palette from './palette'
+import makeStyles from '@material-ui/styles/makeStyles';
+
+import palette from './components/Palette'
+import NoteHeader from './components/NoteHeader'
+import NoteContent from './components/NoteContent'
+import NoteActions from './components/NoteActions'
 
 
 const useStyles = makeStyles((theme) => {
@@ -21,15 +16,6 @@ const useStyles = makeStyles((theme) => {
                                         note.color.light : 
                                         note.color.dark, 
             width: 300, 
-        },  
-        containerIcons: {
-            display: 'flex',  
-        },
-        iconDone: {
-            color: theme.palette.type === 'light'? 
-                   theme.palette.text.secondary : 
-                   theme.palette.text.primary 
-            
         }
     }
 }); 
@@ -63,7 +49,7 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban, 
         localStorage.setItem("notes", JSON.stringify(updateNotes)); 
     }
     
-    const handleUpdateNotesColor = async (noteId, indexColor) => {
+    const handleUpdateNotesColor = (noteId, indexColor) => {
         
         const index = notes.findIndex(note => note.id === noteId); 
         const { id, title, date, details, state } = notes[index];  
@@ -93,57 +79,15 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban, 
 
     return (
        <Card elevation={3} className={classes.card} >
-           <CardHeader className={classes.content} 
-            title={ 
-                <Typography variant='h6' noWrap={false}>
-                    {note.title}
-                </Typography>
-            }
-            subheader={
-                <Typography variant="caption" >
-                    {note.date}
-                </Typography>
-            }
-            action={
-                (note.state === 3) && 
-                <IconButton disabled >
-                    <BsCheckCircle className={classes.iconDone} />
-                </IconButton>
-            }
+            <NoteHeader title={note.title} /> 
+            <NoteContent content={note.details} />
+            <NoteActions 
+                note={note} 
+                language={language}
+                onPalette={selectColor}
+                onDelete={handleToDelete}
+                onChangeState={handleToChangeState}
             />
-            {
-                note.details && 
-                <CardContent  >
-                    <Typography variant='body2'>
-                        {note.details}
-                    </Typography>
-                </CardContent>
-            }
-            <CardContent className={classes.containerIcons} >
-                
-                <PopoverColors  
-                    icon={<RiPaletteLine />} 
-                    palette={palette} 
-                    selectColor={selectColor} 
-                    noteColor={note.color} 
-                    language={language} 
-                />
-               
-                <Tooltip title={language.note_actions.delete} placement='bottom-start' >
-                    <IconButton  onClick={() => handleToDelete(note.id)} >
-                        <RiDeleteBin2Line />
-                    </IconButton>
-                </Tooltip>
-
-                {
-                    note.state === 0 &&  
-                    <Tooltip title={language.note_actions.add_todo} placement='bottom-start' >
-                        <IconButton  onClick={() => handleToChangeState(note.id, 1)}>
-                            <BsKanban />
-                        </IconButton>
-                    </Tooltip>
-                }   
-            </CardContent>
        </Card>
     )
 }
