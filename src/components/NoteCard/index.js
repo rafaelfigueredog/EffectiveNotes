@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import Card from '@material-ui/core/Card'
 import makeStyles from '@material-ui/styles/makeStyles';
@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => {
 export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban, language}) {
 
     const classes = useStyles(note)
+
+    const [title, setTitle] = useState(note.title);
+    const [details, setDetails] = useState(note.details);
 
     const handleToDelete = async (id) => {
         const updatedNotes = notes.filter(note => note.id !== id); 
@@ -77,10 +80,29 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban, 
         handleUpdateNotesColor(note.id, idColor); 
     }
 
+    const handleToChangeTitle = (titleUpdate) => {
+        setTitle(titleUpdate);
+    }
+
+    const handleToChangeDetails = (detailsUpdate) => {
+        setDetails(detailsUpdate);
+        const noteUpdate = note; 
+        noteUpdate.details = detailsUpdate; 
+
+        // TODO: Decoupling this block
+        const hashMap = new Map(notes); 
+        hashMap.set(note.id, noteUpdate); 
+        setNotes(hashMap); 
+
+        // TODO: Decoupling this block
+        localStorage.setItem('notes', JSON.stringify(Array.from(hashMap.entries())));
+    }
+
+
     return (
        <Card elevation={3} className={classes.card} >
-            <NoteHeader title={note.title} /> 
-            <NoteContent content={note.details} />
+            <NoteHeader title={title} onEditMode={(titleUpdate) => handleToChangeTitle(titleUpdate)} /> 
+            <NoteContent details={details} onEditMode={(detailsUpdate) => handleToChangeDetails(detailsUpdate)} />
             <NoteActions 
                 note={note} 
                 language={language}

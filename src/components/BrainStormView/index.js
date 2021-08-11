@@ -28,10 +28,12 @@ const useStyles = makeStyles((theme) => {
 
 export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban, theme, language}) {
 
-  const [brainstorming, setBrainstorming] = useState(notes? notes.filter(note => note.state === 0) : []); 
+  const [brainstorming, setBrainstorming] = useState([]); 
 
   useEffect(() => {
-    setBrainstorming(notes? notes.filter(note => note.state === 0) : [])
+    const notesData = Array.from(notes.values())
+    console.log(notesData); 
+    setBrainstorming(notesData? notesData.filter(note => note.state === 0) : [])
   }, [notes])
 
   const classes = useStyles(brainstorming)
@@ -83,7 +85,7 @@ export default function BrainStormView({ notes, setNotes, onKanban, setOnKanban,
               columnClassName="my-masonry-grid_column"
             >
             
-              {brainstorming.map(note => (
+              {brainstorming.map((note, index) => (
                 <Grow 
                   in={!ShowIllustration()} 
                   style={{ transformOrigin: '0 0 0' }}

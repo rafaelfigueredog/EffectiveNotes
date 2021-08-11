@@ -3,28 +3,33 @@ import React from 'react'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import makeStyles  from '@material-ui/styles/makeStyles';
+import InputBase  from '@material-ui/core/InputBase';
 
-const useStyles = makeStyles({
-    text: {
-        wordWrap: 'break-word'
-    }
+const useStyles = makeStyles(theme => {
+    return (
+        {
+            text: {
+                wordWrap: 'break-word'
+            },
+        }
+    );
 }); 
 
-export default function NoteContent({ content }) {
+export default function NoteContent({ details, onEditMode }) {
     
     const classes = useStyles();
     
     // TODO: Add edit mode
 
-    const ShowContent = () => {
-        return (
-            <CardContent>
-                <Typography className={classes.text} variant='body2'>
-                    {content}
-                </Typography>
-            </CardContent>
-        );
-    } 
-
-    return content && <ShowContent /> 
+    return (
+        <CardContent>
+            <InputBase
+                className={classes.input}       
+                value={details}
+                onChange={(e) => onEditMode(e.target.value) }
+                inputProps={{ maxLength: 140 }}
+                required
+            />
+        </CardContent>
+    );
 }

@@ -8,7 +8,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
-import format from 'date-fns/format'
 import { v4 as uuidv4 } from 'uuid';
 
 import '../../styles.css'; 
@@ -41,38 +40,46 @@ export default function CreateNote({ notes, setNotes, mode, language }) {
     const [color, setColor] = useState(getRandonColor(palette, ""))
     const [title, setTitle] = useState('');
     const [details, setDetails] = useState('');
-    
-    // TODO: Ajust Date
-    const [date, setDate] = useState(format( new Date(),  'do MMMM Y')); 
+
+    const classes = useStyles();
     const state = !mode? 0 : 1; 
 
 
     const handleToSubmit = (e) => {
         e.preventDefault(); 
         document.getElementById("create-note").reset(); 
+
         if (title || details) {
-          setColor( getRandonColor( palette, color ))
-          setDate(format( new Date(),  'do MMMM Y'))
-          const buildNote = { title, details, date, color,  id: uuidv4(), state }
-          setNotes([buildNote, ...notes]); 
-          localStorage.setItem('notes', JSON.stringify([buildNote, ...notes])); 
+          setColor( getRandonColor( palette, color ) );
+          const newNote = { title, details, color,  id: uuidv4(), state };
+          
+          // TODO: Decoupling this block
+          const hashMap = new Map(notes);   
+          hashMap.set(newNote.id, newNote); 
+          setNotes(hashMap);  
+
+          // TODO: Decoupling this block
+          localStorage.setItem('notes', JSON.stringify(Array.from(hashMap.entries()))); 
         }
+
         setDetails(''); 
         setTitle(''); 
     }
-    const classes = useStyles(title);
+
+    
+
     return (
       <Card className={classes.root} elevation={title || details? 3 : 0 } > 
         <form noValidate autoComplete="off"  onSubmit={handleToSubmit} id="create-note" >
-          <CardContent>
-            <InputBase
-              className={classes.input}
-              placeholder={!details? language.create.take_note : language.create.title}
-              onChange={(e) => setTitle(e.target.value) }
-              inputProps={{ maxLength: 30 }}
-              required
-            />
-          </CardContent>
+            <CardContent>
+              <InputBase
+                className={classes.input}
+                placeholder={!details? language.create.take_note : language.create.title}
+                onChange={(e) => setTitle(e.target.value) }
+                inputProps={{ maxLength: 40 }}
+                required
+              />
+            </CardContent>
           {
             (title || details) &&
             <Fade 
@@ -87,7 +94,7 @@ export default function CreateNote({ notes, setNotes, mode, language }) {
                     }}
                     className={classes.input}
                     placeholder={language.create.details}
-                    inputProps={{ maxLength: 130 }}
+                    inputProps={{ maxLength: 140 }}
                 />  
               </CardContent>
             </Fade>

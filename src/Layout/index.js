@@ -17,19 +17,19 @@ const useStyles = makeStyles({
 export default function Layout( {paletteType, setPaletteType, language, setLanguage} ) {
 
     const classes = useStyles(); 
-    const [notes, setNotes] = useState([])
+    const [notes, setNotes] = useState(new Map())
     const [mode, setMode] = useState(0); 
     const [onKanban, setOnKanban] = useState(0);  
  
 
-    useEffect(() => {
+    /* useEffect(() => {
         const notesFromBackEnd = JSON.parse(localStorage.getItem('notes')) || []; 
         const modeFromBackEnd = JSON.parse(localStorage.getItem('mode')) || 0;
         const onKanbanFromBackEnd = JSON.parse(localStorage.getItem('onKanban')) || 0; 
         setOnKanban(onKanbanFromBackEnd);
         setNotes(notesFromBackEnd); 
         setMode(modeFromBackEnd);
-    }, [])
+    }, []) */
   
   
   
