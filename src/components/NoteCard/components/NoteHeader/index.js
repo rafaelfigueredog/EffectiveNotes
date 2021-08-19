@@ -1,30 +1,31 @@
-import React from 'react'
+import React from 'react' 
 
-import CardContent from '@material-ui/core/CardContent'
-import Typography from '@material-ui/core/Typography'
+import CardContent from '@material-ui/core/CardContent' 
+import InputBase from '@material-ui/core/InputBase';
 import makeStyles  from '@material-ui/styles/makeStyles';
 
 const useStyles = makeStyles({
-    text: {
-        wordWrap: 'break-word'
+    input: {
+        wordWrap: 'break-word',
+        fontSize: 20, 
+        fontWeight: 400,
     }
 }); 
 
-export default function NoteHeader({ title }) {
+export default function NoteHeader({ title, onEditMode }) {
     
     const classes = useStyles();
 
-    // TODO: Add edit mode
-
-    const ShowTitle = () => {
-        return (
-            <CardContent>
-                <Typography className={classes.text} variant='h6'>
-                    {title}
-                </Typography>
-            </CardContent>
-        );
-    } 
-
-    return title && <ShowTitle /> 
+    return (
+        <CardContent>
+            <InputBase
+                className={classes.input}
+                value={title}
+                onChange={(e) => onEditMode(e.target.value) }
+                inputProps={{ maxLength: 100 }}
+                multiline
+                required
+            />
+        </CardContent>
+    ); 
 }

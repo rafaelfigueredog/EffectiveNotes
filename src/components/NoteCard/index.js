@@ -7,6 +7,7 @@ import palette from './components/Palette'
 import NoteHeader from './components/NoteHeader'
 import NoteContent from './components/NoteContent'
 import NoteActions from './components/NoteActions'
+import DataBaseService from '../../services/database';
 
 
 const useStyles = makeStyles((theme) => {
@@ -28,76 +29,52 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban, 
     const [title, setTitle] = useState(note.title);
     const [details, setDetails] = useState(note.details);
 
-    const handleToDelete = async (id) => {
-        const updatedNotes = notes.filter(note => note.id !== id); 
-        setNotes(updatedNotes); 
-    
-        /* Local Storage */
-        localStorage.setItem("notes", JSON.stringify(updatedNotes)); 
-    }
-  
-  
-    const handleToChangeState = (noteId, newState) => {
-        const index = notes.findIndex(note => note.id === noteId); 
-        const noteToUpdate = notes[index]; 
-        noteToUpdate.state = newState;  
-        const updateNotes = [...notes] 
-        updateNotes[index] = noteToUpdate; 
-        setNotes(updateNotes)
-        setOnKanban((onKanban + 1)); 
-        
-        
-        /* Local Storage */
-        localStorage.setItem("onKanban", JSON.stringify(onKanban+1)); 
-        localStorage.setItem("notes", JSON.stringify(updateNotes)); 
-    }
-    
-    const handleUpdateNotesColor = (noteId, indexColor) => {
-        
-        const index = notes.findIndex(note => note.id === noteId); 
-        const { id, title, date, details, state } = notes[index];  
-        const colorObject = palette[indexColor]
-        const color = colorObject
-        const updateNotes = [...notes] 
-    
-        const recolorNote = {
-          id, 
-          title, 
-          date, 
-          details, 
-          color, 
-          state, 
-        }
-    
-        updateNotes[index] = recolorNote
-        setNotes(updateNotes)
-        
-        /* Local Storage */
-        localStorage.setItem('notes', JSON.stringify(notes)); 
+    const dataBaseService = new DataBaseService(); 
+
+    const updateDataBase = (note) => {
+        const hashMap = new Map(notes); 
+        hashMap.set(note.id, note); 
+        setNotes(hashMap); 
+        dataBaseService.update('notes', Array.from(hashMap.entries())); 
     }
 
-    const selectColor = (idColor) => {
-        handleUpdateNotesColor(note.id, idColor); 
+    const handleToChangeState = (note, state) => {
+        const hashMap = new Map(notes); 
+        const noteUpdate = hashMap.get(note); 
+        noteUpdate.state = state; 
+        setNotes(hashMap); 
+        setOnKanban(onKanban+1);
+        dataBaseService.update("onKanban", onKanban+1)
+        dataBaseService.update('notes', Array.from(hashMap.entries()));
+    }
+    
+    const handleToDelete = async (id) => {
+        const hashMap = new Map(notes); 
+        hashMap.delete(note.id); 
+        setNotes(hashMap); 
+        const data = Array.from(hashMap.entries()); 
+        new DataBaseService().update('notes', data); 
+    }
+
+    const handleToChangeColor = (color) => {
+        const noteUpdate = note; 
+        noteUpdate.color = palette[color]
+        updateDataBase(note); 
     }
 
     const handleToChangeTitle = (titleUpdate) => {
         setTitle(titleUpdate);
+        const noteUpdate = note; 
+        noteUpdate.details = titleUpdate; 
+        updateDataBase(noteUpdate);
     }
 
     const handleToChangeDetails = (detailsUpdate) => {
         setDetails(detailsUpdate);
         const noteUpdate = note; 
         noteUpdate.details = detailsUpdate; 
-
-        // TODO: Decoupling this block
-        const hashMap = new Map(notes); 
-        hashMap.set(note.id, noteUpdate); 
-        setNotes(hashMap); 
-
-        // TODO: Decoupling this block
-        localStorage.setItem('notes', JSON.stringify(Array.from(hashMap.entries())));
+        updateDataBase(noteUpdate);
     }
-
 
     return (
        <Card elevation={3} className={classes.card} >
@@ -106,7 +83,7 @@ export default function NoteCard({note, notes, setNotes, onKanban, setOnKanban, 
             <NoteActions 
                 note={note} 
                 language={language}
-                onPalette={selectColor}
+                onPalette={handleToChangeColor}
                 onDelete={handleToDelete}
                 onChangeState={handleToChangeState}
             />
