@@ -2,6 +2,14 @@
 Effective Notes is a simple web project for managing note cards. It was created using JavaScript, ReactJS, Material UI, and JsonServer as a mock database. The goal of the project was to gain experience in developing web applications using modern tools and frameworks.
 
 ## Usage
+
+### Brainstorming mode (save your ideas). 
+![Brainstorming mode](https://github.com/rafaelfigueredog/effectiveNotes/blob/main/screenshots/notes.png)
+
+### Productive mode (Kanban) 
+![Kanban](https://github.com/rafaelfigueredog/effectiveNotes/blob/main/screenshots/kanban.png)
+
+## Getting Started
 The application is hosted at https://effectivenotes.netlify.app/ Users can begin using the app immediately.
 
 To run the application locally:
